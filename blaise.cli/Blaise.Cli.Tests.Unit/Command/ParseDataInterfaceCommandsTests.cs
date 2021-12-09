@@ -1,13 +1,12 @@
-﻿using Blaise.Cli.Core.Interfaces;
-using Blaise.Cli.Interfaces;
-using Blaise.Cli.Services;
+﻿using Blaise.Cli.Core.Command;
+using Blaise.Cli.Core.Interfaces;
 using Moq;
 using NUnit.Framework;
 using StatNeth.Blaise.API.DataInterface;
 
-namespace Blaise.Cli.Tests.Unit.Services
+namespace Blaise.Cli.Tests.Unit.Command
 {
-    public class CommandParserServiceTests
+    public class ParseDataInterfaceCommandsTests
     {
         private Mock<IBlaiseFileService> _blaiseFileService;
         private ICommandParser _sut;
@@ -29,8 +28,10 @@ namespace Blaise.Cli.Tests.Unit.Services
         {
             //Arrange
             var args = new[] { "datainterface", "-t" ,$"{applicationType}", "-f", "file.ext" };
+
             //Act
             _sut.ParseArguments(args);
+
             //Assert
             _blaiseFileService.Verify(b => b.CreateDataInterfaceFile(applicationType, "file.ext"));
         }
@@ -45,8 +46,10 @@ namespace Blaise.Cli.Tests.Unit.Services
         {
             //Arrange
             var args = new[] { "datainterface", "--type", $"{applicationType}", "--file", "file.ext" };
+
             //Act
             _sut.ParseArguments(args);
+
             //Assert
             _blaiseFileService.Verify(b => b.CreateDataInterfaceFile(applicationType, "file.ext"));
         }
@@ -56,8 +59,10 @@ namespace Blaise.Cli.Tests.Unit.Services
         {
             //Arrange
             var args = new[] { "datainterface", "-t", $"hello", "-f", "file.ext" };
+
             //Act
             var result = _sut.ParseArguments(args);
+
             //Assert
             Assert.AreEqual(1, result);
         }
@@ -67,8 +72,10 @@ namespace Blaise.Cli.Tests.Unit.Services
         {
             //Arrange
             var args = new[] { "datainterface", "-f", "file.ext" };
+
             //Act
             var result = _sut.ParseArguments(args);
+
             //Assert
             Assert.AreEqual(1, result);
         }
@@ -78,8 +85,10 @@ namespace Blaise.Cli.Tests.Unit.Services
         {
             //Arrange
             var args = new[] { "datainterface", "-t", $"hello" };
+
             //Act
             var result = _sut.ParseArguments(args);
+
             //Assert
             Assert.AreEqual(1, result);
         }

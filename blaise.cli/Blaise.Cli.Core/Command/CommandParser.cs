@@ -1,10 +1,9 @@
 ﻿using System;
+using Blaise.Cli.Core.Command.Models;
 using Blaise.Cli.Core.Interfaces;
-using Blaise.Cli.Core.OptionModels;
-using Blaise.Cli.Interfaces;
 using CommandLine;
 
-namespace Blaise.Cli.Services
+namespace Blaise.Cli.Core.Command
 {
     public class CommandParser : ICommandParser
     {
@@ -25,15 +24,25 @@ namespace Blaise.Cli.Services
                 with.HelpWriter = Console.Out;
             });
 
-            return parser.ParseArguments<DataInterfaceOptions>(args)
+            return parser.ParseArguments<DataInterfaceOptions, DataDeliveryOptions>(args)
               .MapResult(
-                (DataInterfaceOptions options) => { return CreateDataInterface(options); },
-                errors => 1);
+                  (DataInterfaceOptions opts) => CreateDataInterface(opts),
+                  (DataDeliveryOptions opts) => UpdateInstrumentPackageWithData(opts),
+                  errors => 1);
         }
 
         private int CreateDataInterface(DataInterfaceOptions options)
         {
             _blaiseFileService.CreateDataInterfaceFile(options.ApplicationType, options.File);
+
+            return 0;
+        }
+
+        private int UpdateInstrumentPackageWithData(DataDeliveryOptions options)
+        {
+            _blaiseFileService.UpdateInstrumentPackageWithData(options.ServerParkName, options.InstrumentName,
+                options.File);
+
             return 0;
         }
     }

@@ -1,8 +1,7 @@
 ﻿
+using Blaise.Cli.Core.Command;
 using Blaise.Cli.Core.Interfaces;
 using Blaise.Cli.Core.Services;
-using Blaise.Cli.Interfaces;
-using Blaise.Cli.Services;
 using Blaise.Nuget.Api.Api;
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using Microsoft.Extensions.DependencyInjection;

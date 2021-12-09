@@ -1,4 +1,4 @@
-﻿namespace Blaise.Cli.Interfaces
+﻿namespace Blaise.Cli.Core.Interfaces
 {
     public interface ICommandParser
     {

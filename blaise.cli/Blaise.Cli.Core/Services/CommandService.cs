@@ -1,15 +1,15 @@
 ﻿using System;
-using Blaise.Cli.Core.Command.Models;
 using Blaise.Cli.Core.Interfaces;
+using Blaise.Cli.Core.Models;
 using CommandLine;
 
-namespace Blaise.Cli.Core.Command
+namespace Blaise.Cli.Core.Services
 {
-    public class CommandParser : ICommandParser
+    public class CommandService : ICommandService
     {
         private readonly IBlaiseFileService _blaiseFileService;
 
-        public CommandParser(IBlaiseFileService blaiseFileService)
+        public CommandService(IBlaiseFileService blaiseFileService)
         {
             _blaiseFileService = blaiseFileService;
         }

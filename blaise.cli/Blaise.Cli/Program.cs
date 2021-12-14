@@ -1,5 +1,4 @@
 ﻿using System;
-using Blaise.Cli.Core.Command;
 using Blaise.Cli.Core.Interfaces;
 using Blaise.Cli.Core.Services;
 using Blaise.Nuget.Api.Api;
@@ -8,24 +7,24 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Blaise.Cli
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var serviceProvider = new ServiceCollection()
-            .AddSingleton<ICommandParser, CommandParser>()
+            .AddSingleton<ICommandService, CommandService>()
             .AddTransient<IBlaiseFileService, BlaiseFileService>()
             .AddTransient<IBlaiseFileApi, BlaiseFileApi>()
             .BuildServiceProvider();
 
-            var commandParser = serviceProvider.GetService<ICommandParser>();
+            var commandService = serviceProvider.GetService<ICommandService>();
 
-            if (commandParser == null)
+            if (commandService == null)
             {
                 throw new ApplicationException("There was an error in creating the command parser");
             }
 
-            commandParser.ParseArguments(args);
+            commandService.ParseArguments(args);
         }
     }
 }

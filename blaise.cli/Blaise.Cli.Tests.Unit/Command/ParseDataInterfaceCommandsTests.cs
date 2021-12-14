@@ -58,7 +58,7 @@ namespace Blaise.Cli.Tests.Unit.Command
         public void Given_We_Pass_An_Incorrect_ApplicationType_When_We_Call_ParseArguments_Then_Response_Of_1_is_returned()
         {
             //Arrange
-            var args = new[] { "datainterface", "-t", $"hello", "-f", "file.ext" };
+            var args = new[] { "datainterface", "-t", "hello", "-f", "file.ext" };
 
             //Act
             var result = _sut.ParseArguments(args);
@@ -84,7 +84,7 @@ namespace Blaise.Cli.Tests.Unit.Command
         public void Given_We_Dont_Pass_In_FileArgument_When_We_Call_ParseArguments_Then_Response_Of_1_is_returned()
         {
             //Arrange
-            var args = new[] { "datainterface", "-t", $"hello" };
+            var args = new[] { "datainterface", "-t", "hello" };
 
             //Act
             var result = _sut.ParseArguments(args);

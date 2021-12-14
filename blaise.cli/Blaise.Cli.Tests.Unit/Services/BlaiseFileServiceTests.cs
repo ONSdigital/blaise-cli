@@ -50,6 +50,7 @@ namespace Blaise.Cli.Tests.Unit.Services
             //act && assert
             var exception = Assert.Throws<ArgumentException>(() => _sut.CreateDataInterfaceFile(applicationType, string.Empty));
 
+            Assert.IsNotNull(exception);
             Assert.AreEqual("A value for the argument 'fileName' must be supplied", exception.Message);
         }
 
@@ -64,6 +65,7 @@ namespace Blaise.Cli.Tests.Unit.Services
             //act && assert
             var exception = Assert.Throws<ArgumentNullException>(() => _sut.CreateDataInterfaceFile(applicationType, null));
 
+            Assert.IsNotNull(exception);
             Assert.AreEqual("Value cannot be null.\r\nParameter name: fileName", exception.Message);
         }
 
@@ -83,6 +85,7 @@ namespace Blaise.Cli.Tests.Unit.Services
             //act && assert
             var exception = Assert.Throws<ArgumentException>(() => _sut.UpdateInstrumentPackageWithData(string.Empty, _instrumentName, _fileName));
 
+            Assert.IsNotNull(exception);
             Assert.AreEqual("A value for the argument 'serverParkName' must be supplied", exception.Message);
         }
 
@@ -92,6 +95,7 @@ namespace Blaise.Cli.Tests.Unit.Services
             //act && assert
             var exception = Assert.Throws<ArgumentNullException>(() => _sut.UpdateInstrumentPackageWithData(null, _instrumentName, _fileName));
 
+            Assert.IsNotNull(exception);
             Assert.AreEqual("Value cannot be null.\r\nParameter name: serverParkName", exception.Message);
         }
 
@@ -101,6 +105,7 @@ namespace Blaise.Cli.Tests.Unit.Services
             //act && assert
             var exception = Assert.Throws<ArgumentException>(() => _sut.UpdateInstrumentPackageWithData(_serverParkName, string.Empty, _fileName));
 
+            Assert.IsNotNull(exception);
             Assert.AreEqual("A value for the argument 'instrumentName' must be supplied", exception.Message);
         }
 
@@ -110,6 +115,7 @@ namespace Blaise.Cli.Tests.Unit.Services
             //act && assert
             var exception = Assert.Throws<ArgumentNullException>(() => _sut.UpdateInstrumentPackageWithData(_serverParkName, null, _fileName));
 
+            Assert.IsNotNull(exception);
             Assert.AreEqual("Value cannot be null.\r\nParameter name: instrumentName", exception.Message);
         }
 
@@ -119,6 +125,7 @@ namespace Blaise.Cli.Tests.Unit.Services
             //act && assert
             var exception = Assert.Throws<ArgumentException>(() => _sut.UpdateInstrumentPackageWithData(_serverParkName, _instrumentName, string.Empty));
 
+            Assert.IsNotNull(exception);
             Assert.AreEqual("A value for the argument 'fileName' must be supplied", exception.Message);
         }
 
@@ -128,6 +135,7 @@ namespace Blaise.Cli.Tests.Unit.Services
             //act && assert
             var exception = Assert.Throws<ArgumentNullException>(() => _sut.UpdateInstrumentPackageWithData(_serverParkName, _instrumentName, null));
 
+            Assert.IsNotNull(exception);
             Assert.AreEqual("Value cannot be null.\r\nParameter name: fileName", exception.Message);
         }
     }

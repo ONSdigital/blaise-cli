@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 using Blaise.Cli.Core.Command;
 using Blaise.Cli.Core.Interfaces;
 using Blaise.Cli.Core.Services;
@@ -19,6 +19,12 @@ namespace Blaise.Cli
             .BuildServiceProvider();
 
             var commandParser = serviceProvider.GetService<ICommandParser>();
+
+            if (commandParser == null)
+            {
+                throw new ApplicationException("There was an error in creating the command parser");
+            }
+
             commandParser.ParseArguments(args);
         }
     }

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blaise.Cli.Tests.Unit", "Bl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blaise.Cli.Core", "Blaise.Cli.Core\Blaise.Cli.Core.csproj", "{453C36A5-B6CA-4973-A227-5E12ECB27EB1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6895CC96-9838-44C6-A219-BAD513E7879A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A464367B-0DDF-4BFD-BB6F-922A72AC0C46} = {6895CC96-9838-44C6-A219-BAD513E7879A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6ED8C9F5-E9A2-4647-A30D-34ADC144615A}

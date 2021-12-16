@@ -1,9 +1,9 @@
 ﻿using CommandLine;
 using StatNeth.Blaise.API.DataInterface;
 
-namespace Blaise.Cli.Core.OptionModels
+namespace Blaise.Cli.Core.Models
 {
-    [Verb("datainterface", HelpText = "Spells out your name")]
+    [Verb("datainterface", HelpText = "Data interface options")]
     public class DataInterfaceOptions
     {
         [Option('t', "type", Required = true, HelpText = "Type of data interface you want to create")]

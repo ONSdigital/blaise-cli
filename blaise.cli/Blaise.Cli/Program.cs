@@ -1,26 +1,30 @@
-﻿
+﻿using System;
 using Blaise.Cli.Core.Interfaces;
 using Blaise.Cli.Core.Services;
-using Blaise.Cli.Interfaces;
-using Blaise.Cli.Services;
 using Blaise.Nuget.Api.Api;
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Blaise.Cli
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var serviceProvider = new ServiceCollection()
-            .AddSingleton<ICommandParser, CommandParser>()
+            .AddSingleton<ICommandService, CommandService>()
             .AddTransient<IBlaiseFileService, BlaiseFileService>()
             .AddTransient<IBlaiseFileApi, BlaiseFileApi>()
             .BuildServiceProvider();
 
-            var commandParser = serviceProvider.GetService<ICommandParser>();
-            commandParser.ParseArguments(args);
+            var commandService = serviceProvider.GetService<ICommandService>();
+
+            if (commandService == null)
+            {
+                throw new ApplicationException("There was an error in creating the command parser");
+            }
+
+            commandService.ParseArguments(args);
         }
     }
 }

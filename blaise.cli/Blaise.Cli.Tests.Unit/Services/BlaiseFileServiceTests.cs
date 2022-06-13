@@ -14,7 +14,7 @@ namespace Blaise.Cli.Tests.Unit.Services
         private IBlaiseFileService _sut;
 
         private readonly string _serverParkName = "gusty";
-        private readonly string _instrumentName = "OPN2101A";
+        private readonly string _questionnaireName = "OPN2101A";
         private readonly string _fileName = "OPN2101A.bpkg";
 
         [SetUp]
@@ -70,70 +70,70 @@ namespace Blaise.Cli.Tests.Unit.Services
         }
 
         [Test]
-        public void Given_We_Have_Passed_Valid_Parameters_When_We_Call_UpdateInstrumentPackageWithData_Then_The_Correct_API_Call_Is_Made()
+        public void Given_We_Have_Passed_Valid_Parameters_When_We_Call_UpdateQuestionnairePackageWithData_Then_The_Correct_API_Call_Is_Made()
         {
             //act
-            _sut.UpdateInstrumentPackageWithData(_serverParkName, _instrumentName, _fileName);
+            _sut.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName);
 
             //assert
-            _blaiseFileApi.Verify(b => b.UpdateInstrumentFileWithData(_serverParkName, _instrumentName, _fileName), Times.Once);
+            _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithData(_serverParkName, _questionnaireName, _fileName), Times.Once);
         }
 
         [Test]
-        public void Given_We_Have_Called_UpdateInstrumentPackageWithData_When_We_have_supplied_An_Empty_ServerParkName_Then_An_Error_Is_Thrown()
+        public void Given_We_Have_Called_UpdateQuestionnairePackageWithData_When_We_have_supplied_An_Empty_ServerParkName_Then_An_Error_Is_Thrown()
         {
             //act && assert
-            var exception = Assert.Throws<ArgumentException>(() => _sut.UpdateInstrumentPackageWithData(string.Empty, _instrumentName, _fileName));
+            var exception = Assert.Throws<ArgumentException>(() => _sut.UpdateQuestionnairePackageWithData(string.Empty, _questionnaireName, _fileName));
 
             Assert.IsNotNull(exception);
             Assert.AreEqual("A value for the argument 'serverParkName' must be supplied", exception.Message);
         }
 
         [Test]
-        public void Given_We_Have_Called_UpdateInstrumentPackageWithData_When_We_have_supplied_A_Null_Value_For_ServerParkName_Then_An_Error_Is_Thrown()
+        public void Given_We_Have_Called_UpdateQuestionnairePackageWithData_When_We_have_supplied_A_Null_Value_For_ServerParkName_Then_An_Error_Is_Thrown()
         {
             //act && assert
-            var exception = Assert.Throws<ArgumentNullException>(() => _sut.UpdateInstrumentPackageWithData(null, _instrumentName, _fileName));
+            var exception = Assert.Throws<ArgumentNullException>(() => _sut.UpdateQuestionnairePackageWithData(null, _questionnaireName, _fileName));
 
             Assert.IsNotNull(exception);
             Assert.AreEqual("Value cannot be null.\r\nParameter name: serverParkName", exception.Message);
         }
 
         [Test]
-        public void Given_We_Have_Called_UpdateInstrumentPackageWithData_When_We_have_supplied_An_Empty_InstrumentName_Then_An_Error_Is_Thrown()
+        public void Given_We_Have_Called_UpdateQuestionnairePackageWithData_When_We_have_supplied_An_Empty_QuestionnaireName_Then_An_Error_Is_Thrown()
         {
             //act && assert
-            var exception = Assert.Throws<ArgumentException>(() => _sut.UpdateInstrumentPackageWithData(_serverParkName, string.Empty, _fileName));
+            var exception = Assert.Throws<ArgumentException>(() => _sut.UpdateQuestionnairePackageWithData(_serverParkName, string.Empty, _fileName));
 
             Assert.IsNotNull(exception);
-            Assert.AreEqual("A value for the argument 'instrumentName' must be supplied", exception.Message);
+            Assert.AreEqual("A value for the argument 'questionnaireName' must be supplied", exception.Message);
         }
 
         [Test]
-        public void Given_We_Have_Called_UpdateInstrumentPackageWithData_When_We_have_supplied_A_Null_Value_For_InstrumentName_Then_An_Error_Is_Thrown()
+        public void Given_We_Have_Called_UpdateQuestionnairePackageWithData_When_We_have_supplied_A_Null_Value_For_QuestionnaireName_Then_An_Error_Is_Thrown()
         {
             //act && assert
-            var exception = Assert.Throws<ArgumentNullException>(() => _sut.UpdateInstrumentPackageWithData(_serverParkName, null, _fileName));
+            var exception = Assert.Throws<ArgumentNullException>(() => _sut.UpdateQuestionnairePackageWithData(_serverParkName, null, _fileName));
 
             Assert.IsNotNull(exception);
-            Assert.AreEqual("Value cannot be null.\r\nParameter name: instrumentName", exception.Message);
+            Assert.AreEqual("Value cannot be null.\r\nParameter name: questionnaireName", exception.Message);
         }
 
         [Test]
-        public void Given_We_Have_Called_UpdateInstrumentPackageWithData_When_We_have_supplied_An_Empty_FileName_Then_An_Error_Is_Thrown()
+        public void Given_We_Have_Called_UpdateQuestionnairePackageWithData_When_We_have_supplied_An_Empty_FileName_Then_An_Error_Is_Thrown()
         {
             //act && assert
-            var exception = Assert.Throws<ArgumentException>(() => _sut.UpdateInstrumentPackageWithData(_serverParkName, _instrumentName, string.Empty));
+            var exception = Assert.Throws<ArgumentException>(() => _sut.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, string.Empty));
 
             Assert.IsNotNull(exception);
             Assert.AreEqual("A value for the argument 'fileName' must be supplied", exception.Message);
         }
 
         [Test]
-        public void Given_We_Have_Called_UpdateInstrumentPackageWithData_When_We_have_supplied_A_Null_Value_For_FileName_Then_An_Error_Is_Thrown()
+        public void Given_We_Have_Called_UpdateQuestionnairePackageWithData_When_We_have_supplied_A_Null_Value_For_FileName_Then_An_Error_Is_Thrown()
         {
             //act && assert
-            var exception = Assert.Throws<ArgumentNullException>(() => _sut.UpdateInstrumentPackageWithData(_serverParkName, _instrumentName, null));
+            var exception = Assert.Throws<ArgumentNullException>(() => _sut.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, null));
 
             Assert.IsNotNull(exception);
             Assert.AreEqual("Value cannot be null.\r\nParameter name: fileName", exception.Message);

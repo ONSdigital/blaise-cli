@@ -27,7 +27,7 @@ namespace Blaise.Cli.Core.Services
             return parser.ParseArguments<DataInterfaceOptions, DataDeliveryOptions>(args)
               .MapResult(
                   (DataInterfaceOptions opts) => CreateDataInterface(opts),
-                  (DataDeliveryOptions opts) => UpdateInstrumentPackageWithData(opts),
+                  (DataDeliveryOptions opts) => UpdateQuestionnairePackageWithData(opts),
                   errors => 1);
         }
 
@@ -38,9 +38,9 @@ namespace Blaise.Cli.Core.Services
             return 0;
         }
 
-        private int UpdateInstrumentPackageWithData(DataDeliveryOptions options)
+        private int UpdateQuestionnairePackageWithData(DataDeliveryOptions options)
         {
-            _blaiseFileService.UpdateInstrumentPackageWithData(options.ServerParkName, options.InstrumentName,
+            _blaiseFileService.UpdateQuestionnairePackageWithData(options.ServerParkName, options.QuestionnaireName,
                 options.File);
 
             return 0;

@@ -5,13 +5,13 @@ namespace Blaise.Cli.Core.Models
     [Verb("datadelivery", HelpText = "Data delivery pipeline options")]
     public class DataDeliveryOptions
     {
-        [Option('s', "serverParkName", Required = true, HelpText = "The name of the server park that houses the instrument data")]
+        [Option('s', "serverParkName", Required = true, HelpText = "The name of the server park that houses the questionnaire data")]
         public string ServerParkName { get; set; }
 
-        [Option('i', "instrumentName", Required = true, HelpText = "The name of the instrument")]
-        public string InstrumentName { get; set; }
+        [Option('q', "questionnaireName", Required = true, HelpText = "The name of the questionnaire")]
+        public string QuestionnaireName { get; set; }
 
-        [Option('f', "file", Required = true, HelpText = "The package file containing the instrument file")]
+        [Option('f', "file", Required = true, HelpText = "The package file containing the questionnaire file")]
         public string File { get; set; }
     }
 }

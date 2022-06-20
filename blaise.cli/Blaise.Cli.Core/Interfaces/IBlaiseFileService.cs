@@ -6,6 +6,6 @@ namespace Blaise.Cli.Core.Interfaces
     {
         void CreateDataInterfaceFile(ApplicationType applicationType, string fileName);
 
-        void UpdateInstrumentPackageWithData(string serverParkName, string instrumentName, string fileName);
+        void UpdateQuestionnairePackageWithData(string serverParkName, string questionnaireName, string fileName);
     }
 }

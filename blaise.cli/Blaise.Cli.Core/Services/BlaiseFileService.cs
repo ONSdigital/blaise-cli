@@ -20,13 +20,13 @@ namespace Blaise.Cli.Core.Services
             _blaiseFileApi.CreateSettingsDataInterfaceFile(applicationType, fileName);
         }
 
-        public void UpdateInstrumentPackageWithData(string serverParkName, string instrumentName, string fileName)
+        public void UpdateQuestionnairePackageWithData(string serverParkName, string questionnaireName, string fileName)
         {
             serverParkName.ThrowExceptionIfNullOrEmpty("serverParkName");
-            instrumentName.ThrowExceptionIfNullOrEmpty("instrumentName");
+            questionnaireName.ThrowExceptionIfNullOrEmpty("questionnaireName");
             fileName.ThrowExceptionIfNullOrEmpty("fileName");
 
-            _blaiseFileApi.UpdateInstrumentFileWithData(serverParkName, instrumentName, fileName);
+            _blaiseFileApi.UpdateQuestionnaireFileWithData(serverParkName, questionnaireName, fileName);
         }
     }
 }

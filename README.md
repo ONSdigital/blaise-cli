@@ -18,7 +18,7 @@ blaise.cli --help
 
 https://help.blaise.com/Blaise.html?blaise_data_interface.htm
 
-The data interface files tell Blaise how to connect to the database targets. They also create the objects required in the database, essentially the tables and columns.
+The data interface files tell Blaise how to connect to the database targets. They are also used create the objects required in the database, essentially the tables and columns.
 
 Use the verb 'datainterface' to access the command, it then requires two parameters: 
 

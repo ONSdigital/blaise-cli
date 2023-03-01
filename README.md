@@ -20,7 +20,7 @@ https://help.blaise.com/Blaise.html?blaise_data_interface.htm
 
 The data interface files tell Blaise how to connect to the database targets. They are also used to create the objects required in the database, essentially the tables and columns.
 
-Use the verb 'datainterface' to access the command, it then requires two parameters: 
+Use the verb `datainterface` to access the command, it then requires two parameters: 
 
 - **type**, long name `--type`, short name `-t`, the type of data interface file you wish to create (Cati, Cari, AuditTrail, Configuration, Meta, Session, Credentials)
 - **file**, long name `--file`, short name `-f`, the name of the file you wish to create

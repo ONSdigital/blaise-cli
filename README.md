@@ -1,4 +1,4 @@
-# Command Line Application for our Blaise NuGet Package
+# Command Line Application for our Blaise NuGet package
 
 This is a CLI console application that wraps around our [Blaise NuGet package](https://github.com/ONSdigital/blaise-nuget-api).
 
@@ -8,7 +8,7 @@ This is used as part of data delivery and for configuring Blaise.
 
 Set the Blaise connection details and the database string in the `app.config` file within the `Blaise.Cli` project.
 
-Help can be accessed with the following comamnd:
+Help can be accessed with the following command:
 
 ```
 blaise.cli --help
@@ -27,13 +27,13 @@ Use the verb `datainterface` to access the command, it then requires two paramet
 
 **Examples**
 
-Crate data interface file using long names:
+Create data interface file using long names:
 
 ```
 blaise.cli datainterface --type cati --file catidb
 ```
 
-Crate data interface file using short names:
+Create data interface file using short names:
 
 ```
 blaise.cli datainterface -t cati -f catidb

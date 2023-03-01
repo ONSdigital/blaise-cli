@@ -1,4 +1,4 @@
-# Command Line Application for Blaise NuGet Package
+# Command Line Application for our Blaise NuGet Package
 
 This is a CLI console application that wraps around our [Blaise NuGet package](https://github.com/ONSdigital/blaise-nuget-api).
 

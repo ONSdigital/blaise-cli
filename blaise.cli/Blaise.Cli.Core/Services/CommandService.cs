@@ -45,8 +45,6 @@ namespace Blaise.Cli.Core.Services
 
         private int UpdateQuestionnairePackageWithData(DataDeliveryOptions options)
         {
-            _blaiseFileService.UpdateQuestionnairePackageWithData(options.ServerParkName, options.QuestionnaireName,
-                options.File);
             Console.WriteLine("Data Delivery options");
             Console.WriteLine($"    Server Park: {options.ServerParkName}");
             Console.WriteLine($"    Questionnaire Name: {options.QuestionnaireName}");

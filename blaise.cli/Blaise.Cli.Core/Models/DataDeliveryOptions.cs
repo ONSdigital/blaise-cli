@@ -13,5 +13,8 @@ namespace Blaise.Cli.Core.Models
 
         [Option('f', "file", Required = true, HelpText = "The package file containing the questionnaire file")]
         public string File { get; set; }
+
+        [Option('a', "audit", Required = true, HelpText = "The audit trail data for the questionnaire")]
+        public string Audit { get; set; } = "false";
     }
 }

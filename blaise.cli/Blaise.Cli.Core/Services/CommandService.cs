@@ -84,19 +84,14 @@ namespace Blaise.Cli.Core.Services
 
         private void RunLongProcess(DataDeliveryOptions options)
         {
-            try
-            {
-                // Simulate a long process by introducing a delay
-                Thread.Sleep(5000);
 
-                var auditOption = Convert.ToBoolean(options.Audit);
-                _blaiseFileService.UpdateQuestionnairePackageWithData(options.ServerParkName, options.QuestionnaireName,
-                    options.File, auditOption);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            // Simulate a long process by introducing a delay
+            Thread.Sleep(5000);
+
+            var auditOption = Convert.ToBoolean(options.Audit);
+            _blaiseFileService.UpdateQuestionnairePackageWithData(options.ServerParkName, options.QuestionnaireName,
+                options.File, auditOption);
+
         }
 
         private static void SpinningCursor()

@@ -15,6 +15,6 @@ namespace Blaise.Cli.Core.Models
         public string File { get; set; }
 
         [Option('a', "audit", Required = true, HelpText = "The audit trail data for the questionnaire")]
-        public string Audit { get; set; } = "false";
+        public string Audit { get; set; } = "true";
     }
 }

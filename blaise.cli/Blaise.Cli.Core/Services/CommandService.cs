@@ -3,6 +3,7 @@ using Blaise.Cli.Core.Models;
 using CommandLine;
 using System;
 using System.Threading;
+// ReSharper disable All
 
 namespace Blaise.Cli.Core.Services
 {
@@ -45,37 +46,57 @@ namespace Blaise.Cli.Core.Services
 
         private int UpdateQuestionnairePackageWithData(DataDeliveryOptions options)
         {
-            Console.WriteLine("Data Delivery options");
-            Console.WriteLine($"    Server Park: {options.ServerParkName}");
-            Console.WriteLine($"    Questionnaire Name: {options.QuestionnaireName}");
-            Console.WriteLine($"    Questionnaire File: {options.File}");
-
-            var auditOption = Convert.ToBoolean(options.Audit);
-            Console.ForegroundColor = auditOption ? ConsoleColor.Green : ConsoleColor.Red;
-            Console.WriteLine($"    Audit Enabled: {options.Audit}");
-            Console.ResetColor();
-
             // Create a new thread for the spinning cursor
             var cursorThread = new Thread(SpinningCursor);
-            cursorThread.Start();
+            try
+            {
+                Console.WriteLine("Data Delivery options");
+                Console.WriteLine($"    Server Park: {options.ServerParkName}");
+                Console.WriteLine($"    Questionnaire Name: {options.QuestionnaireName}");
+                Console.WriteLine($"    Questionnaire File: {options.File}");
 
-            // Run task
-            RunLongProcess(options);
+                var auditOption = Convert.ToBoolean(options.Audit);
+                Console.ForegroundColor = auditOption ? ConsoleColor.Green : ConsoleColor.Red;
+                Console.WriteLine($"    Audit Enabled: {options.Audit}");
+                Console.ResetColor();
 
-            // Stop the spinning cursor
-            cursorThread.Abort();
-            Console.WriteLine("File created successfully");
-            return 0;
+                // Start thread for the spinning cursor
+
+                cursorThread.Start();
+
+                // Run task
+                RunLongProcess(options);
+
+                // Stop the spinning cursor
+                cursorThread.Abort();
+                Console.WriteLine("File created successfully");
+                return 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                cursorThread.Abort();
+            }
         }
 
         private void RunLongProcess(DataDeliveryOptions options)
         {
-            // Simulate a long process by introducing a delay
-            Thread.Sleep(5000);
+            try
+            {
+                // Simulate a long process by introducing a delay
+                Thread.Sleep(5000);
 
-            var auditOption = Convert.ToBoolean(options.Audit);
-            _blaiseFileService.UpdateQuestionnairePackageWithData(options.ServerParkName, options.QuestionnaireName,
-                               options.File, auditOption);
+                var auditOption = Convert.ToBoolean(options.Audit);
+                _blaiseFileService.UpdateQuestionnairePackageWithData(options.ServerParkName, options.QuestionnaireName,
+                    options.File, auditOption);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private static void SpinningCursor()

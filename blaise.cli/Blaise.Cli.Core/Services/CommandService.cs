@@ -89,9 +89,16 @@ namespace Blaise.Cli.Core.Services
             Thread.Sleep(5000);
 
             var auditOption = Convert.ToBoolean(options.Audit);
-            _blaiseFileService.UpdateQuestionnairePackageWithData(options.ServerParkName, options.QuestionnaireName,
-                options.File, auditOption);
-
+            try
+            {
+                _blaiseFileService.UpdateQuestionnairePackageWithData(options.ServerParkName, options.QuestionnaireName,
+                    options.File, auditOption);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error in updating questionnaire - {ex}");
+                throw;
+            }
         }
 
         private static void SpinningCursor()

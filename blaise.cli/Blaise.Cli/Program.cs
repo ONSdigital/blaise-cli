@@ -34,15 +34,27 @@ namespace Blaise.Cli
             }
             catch (ArgumentException e)
             {
+#if DEBUG
                 Console.WriteLine($"Blaise configuration error: {e.Message}");
+#else
+                throw new ArgumentException($"Blaise configuration error: {e.Message}");
+#endif
             }
-            catch (FileNotFoundException ee)
+            catch (FileNotFoundException e)
             {
-                Console.WriteLine($"Error: {ee.Message}");
+#if DEBUG
+                Console.WriteLine($"File Not Found: {e.Message}");
+#else
+                throw new FileNotFoundException($"File Not Found: {e.Message}");
+#endif
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Console.WriteLine($"Error:: {ex.Message}");
+#if DEBUG
+                Console.WriteLine($"Error: {e.Message}");
+#else
+                throw new FileNotFoundException($"Error: {e.Message}");
+#endif
             }
             finally
             {

@@ -1,7 +1,8 @@
-﻿using System;
-using Blaise.Cli.Core.Interfaces;
+﻿using Blaise.Cli.Core.Interfaces;
 using Blaise.Cli.Core.Models;
 using CommandLine;
+using System;
+// ReSharper disable All
 
 namespace Blaise.Cli.Core.Services
 {
@@ -34,14 +35,16 @@ namespace Blaise.Cli.Core.Services
         private int CreateDataInterface(DataInterfaceOptions options)
         {
             _blaiseFileService.CreateDataInterfaceFile(options.ApplicationType, options.File);
+            _blaiseFileService.CreateDataInterfaceFile(options.ApplicationType, options.File);
 
             return 0;
         }
 
         private int UpdateQuestionnairePackageWithData(DataDeliveryOptions options)
         {
+            var auditOption = Convert.ToBoolean(options.Audit);
             _blaiseFileService.UpdateQuestionnairePackageWithData(options.ServerParkName, options.QuestionnaireName,
-                options.File);
+                options.File, auditOption);
 
             return 0;
         }

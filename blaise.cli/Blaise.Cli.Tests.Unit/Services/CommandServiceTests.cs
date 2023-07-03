@@ -14,6 +14,7 @@ namespace Blaise.Cli.Tests.Unit.Services
         private readonly string _serverParkName = "gusty";
         private readonly string _questionnaireName = "OPN2101A";
         private readonly string _fileName = "OPN2101A.bpkg";
+        private bool _auditOptions;
 
         [SetUp]
         public void SetupTests()
@@ -26,32 +27,48 @@ namespace Blaise.Cli.Tests.Unit.Services
         public void Given_We_Pass_DataDelivery_Arguments_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments()
         {
             //Arrange
-            var args = new[] { "datadelivery", "-s" , _serverParkName, "-q", _questionnaireName,  "-f", _fileName };
+            var args = new[] { "datadelivery", "-s", _serverParkName, "-q", _questionnaireName, "-f", _fileName, "-a", _auditOptions.ToString() };
 
             //Act
             _sut.ParseArguments(args);
 
             //Assert
-            _blaiseFileService.Verify(b => b.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName));
+            var audit = bool.Parse(_auditOptions.ToString());
+            _blaiseFileService.Verify(b => b.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName, audit));
+        }
+
+        [Test]
+        public void Given_We_Pass_DataDelivery_Audit_Arguments_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments()
+        {
+            //Arrange
+            _auditOptions = true;
+            var args = new[] { "datadelivery", "-s", _serverParkName, "-q", _questionnaireName, "-f", _fileName, "-a", _auditOptions.ToString() };
+
+            //Act
+            _sut.ParseArguments(args);
+
+            //Assert
+            var audit = bool.Parse(_auditOptions.ToString());
+            _blaiseFileService.Verify(b => b.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName, audit));
         }
 
         [Test]
         public void Given_We_Pass_DataDelivery_Arguments_With_FullNames_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments()
         {
             //Arrange
-            var args = new[] { "datadelivery", "--serverParkName", _serverParkName, "--questionnaireName", _questionnaireName, "--file", _fileName };
+            var args = new[] { "datadelivery", "--serverParkName", _serverParkName, "--questionnaireName", _questionnaireName, "--file", _fileName, "-a", _auditOptions.ToString() };
             //Act
             _sut.ParseArguments(args);
 
             //Assert
-            _blaiseFileService.Verify(b => b.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName));
+            _blaiseFileService.Verify(b => b.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName, false));
         }
 
         [Test]
         public void Given_We_Do_Not_Pass_A_ServerParkName_When_We_Call_ParseArguments_Then_Response_Of_1_is_returned()
         {
             //Arrange
-            var args = new[] { "datadelivery", "--questionnaireName", _questionnaireName, "--file", _fileName };
+            var args = new[] { "datadelivery", "--questionnaireName", _questionnaireName, "--file", _fileName, "-a", _auditOptions.ToString() };
 
             //Act
             var result = _sut.ParseArguments(args);
@@ -64,7 +81,7 @@ namespace Blaise.Cli.Tests.Unit.Services
         public void Given_We_Do_Not_Pass_An_QuestionnaireName_When_We_Call_ParseArguments_Then_Response_Of_1_is_returned()
         {
             //Arrange
-            var args = new[] { "datadelivery", "--serverParkName", _serverParkName, "--file", _fileName };
+            var args = new[] { "datadelivery", "--serverParkName", _serverParkName, "--file", _fileName, "-a", _auditOptions.ToString() };
 
             //Act
             var result = _sut.ParseArguments(args);

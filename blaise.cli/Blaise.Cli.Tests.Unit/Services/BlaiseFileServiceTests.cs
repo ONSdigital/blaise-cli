@@ -1,10 +1,10 @@
-﻿using System;
-using Blaise.Cli.Core.Interfaces;
+﻿using Blaise.Cli.Core.Interfaces;
 using Blaise.Cli.Core.Services;
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using Moq;
 using NUnit.Framework;
 using StatNeth.Blaise.API.DataInterface;
+using System;
 
 namespace Blaise.Cli.Tests.Unit.Services
 {
@@ -16,6 +16,7 @@ namespace Blaise.Cli.Tests.Unit.Services
         private readonly string _serverParkName = "gusty";
         private readonly string _questionnaireName = "OPN2101A";
         private readonly string _fileName = "OPN2101A.bpkg";
+        private readonly bool _auditOptions = false;
 
         [SetUp]
         public void SetupTests()
@@ -73,10 +74,10 @@ namespace Blaise.Cli.Tests.Unit.Services
         public void Given_We_Have_Passed_Valid_Parameters_When_We_Call_UpdateQuestionnairePackageWithData_Then_The_Correct_API_Call_Is_Made()
         {
             //act
-            _sut.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName);
+            _sut.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName, _auditOptions);
 
             //assert
-            _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithData(_serverParkName, _questionnaireName, _fileName), Times.Once);
+            _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithData(_serverParkName, _questionnaireName, _fileName, _auditOptions), Times.Once);
         }
 
         [Test]

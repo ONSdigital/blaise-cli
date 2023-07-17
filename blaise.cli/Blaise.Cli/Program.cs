@@ -53,7 +53,7 @@ namespace Blaise.Cli
 #if DEBUG
                 Console.WriteLine($"Error: {e.Message}");
 #else
-                throw new FileNotFoundException($"Error: {e.Message}");
+                throw new Exception($"Error: {e.Message}");
 #endif
             }
             finally

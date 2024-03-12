@@ -21,7 +21,7 @@ namespace Blaise.Cli.Core.Services
             serverParkName.ThrowExceptionIfNullOrEmpty("serverParkName");
             questionnaireFile.ThrowExceptionIfNullOrEmpty("questionnaireFile");
 
-            _blaiseQuestionnaireApi.InstallQuestionnaire(serverParkName, questionnaireName, questionnaireFile, QuestionnaireInterviewType.Capi);
+            _blaiseQuestionnaireApi.InstallQuestionnaire(questionnaireName, serverParkName, questionnaireFile, QuestionnaireInterviewType.Capi);
         }
     }
 }

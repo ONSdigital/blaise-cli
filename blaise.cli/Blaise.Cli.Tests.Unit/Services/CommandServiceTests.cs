@@ -9,6 +9,7 @@ namespace Blaise.Cli.Tests.Unit.Services
     public class CommandServiceTests
     {
         private Mock<IBlaiseFileService> _blaiseFileService;
+        private Mock<IBlaiseQuestionnaireService> _blaiseQuestionnaireService;
         private ICommandService _sut;
 
         private readonly string _serverParkName = "gusty";
@@ -20,7 +21,8 @@ namespace Blaise.Cli.Tests.Unit.Services
         public void SetupTests()
         {
             _blaiseFileService = new Mock<IBlaiseFileService>();
-            _sut = new CommandService(_blaiseFileService.Object);
+            _blaiseQuestionnaireService = new Mock<IBlaiseQuestionnaireService>();
+            _sut = new CommandService(_blaiseFileService.Object, _blaiseQuestionnaireService.Object);
         }
 
         [Test]
@@ -177,5 +179,86 @@ namespace Blaise.Cli.Tests.Unit.Services
             //Assert
             Assert.AreEqual(1, result);
         }
+
+
+        [Test]
+        public void Given_We_Pass_QuestionnaireInstall_Arguments_When_We_Call_ParseArgument_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments()
+        {
+            //Arrange
+            var args = new[] { "questionnaireinstall", "-q", _questionnaireName, "-s", _serverParkName, "-f", _fileName };
+
+            //Act
+            _sut.ParseArguments(args);
+
+            //Assert
+            _blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName));
+        }
+
+        [Test]
+        public void Given_We_Pass_QuestionnaireInstall_Audit_Arguments_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments()
+        {
+            //Arrange
+            _auditOptions = true;
+            var args = new[] { "questionnaireinstall", "-q", _questionnaireName, "-s", _serverParkName, "-f", _fileName };
+
+            //Act
+            _sut.ParseArguments(args);
+
+            //Assert
+            var audit = bool.Parse(_auditOptions.ToString());
+            _blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName));
+        }
+
+        [Test]
+        public void Given_We_Pass_QuestionnaireInstall_Arguments_With_FullNames_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments()
+        {
+            //Arrange
+            var args = new[] { "questionnaireinstall", "--serverParkName", _serverParkName, "--questionnaireName", _questionnaireName, "--questionnaireFile", _fileName };
+            //Act
+            _sut.ParseArguments(args);
+
+            //Assert
+            _blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName));
+        }
+
+        [Test]
+        public void Given_We_Do_Not_Pass_A_ServerParkName_When_We_Call_ParseArguments_Then_Response_Of_1_is_returned_QuestionnaireInstall()
+        {
+            //Arrange
+            var args = new[] { "questionnaireinstall", "--questionnaireName", _questionnaireName, "--questionnaireFile", _fileName };
+
+            //Act
+            var result = _sut.ParseArguments(args);
+
+            //Assert
+            Assert.AreEqual(1, result);
+        }
+
+        [Test]
+        public void Given_We_Do_Not_Pass_An_QuestionnaireName_When_We_Call_ParseArguments_Then_Response_Of_1_is_returned_QuestionnaireInstall()
+        {
+            //Arrange
+            var args = new[] { "questionnaireinstall", "--serverParkName", _serverParkName, "--questionnaireFile", _fileName, "-a", _auditOptions.ToString() };
+
+            //Act
+            var result = _sut.ParseArguments(args);
+
+            //Assert
+            Assert.AreEqual(1, result);
+        }
+
+        [Test]
+        public void Given_We_Do_Not_Pass_A_File_When_We_Call_ParseArguments_Then_Response_Of_1_is_returned_()
+        {
+            //Arrange
+            var args = new[] { "questionnaireinstall", "--serverParkName", _serverParkName, "--questionnaireName", _questionnaireName };
+
+            //Act
+            var result = _sut.ParseArguments(args);
+
+            //Assert
+            Assert.AreEqual(1, result);
+        }
+
     }
 }

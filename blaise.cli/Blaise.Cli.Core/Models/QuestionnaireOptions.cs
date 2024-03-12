@@ -12,6 +12,6 @@ namespace Blaise.Cli.Core.Models
         public string ServerParkName { get; set; }
 
         [Option('f', "questionnaireFile", Required = true, HelpText = "The package file containing the questionnaire file")]
-        public string File { get; set; }
+        public string QuestionnaireFile { get; set; }
     }
 }

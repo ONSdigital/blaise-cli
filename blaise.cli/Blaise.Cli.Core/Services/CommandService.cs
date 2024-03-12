@@ -9,10 +9,12 @@ namespace Blaise.Cli.Core.Services
     public class CommandService : ICommandService
     {
         private readonly IBlaiseFileService _blaiseFileService;
+        private readonly IBlaiseQuestionnaireService _blaiseQuestionnaireService;
 
-        public CommandService(IBlaiseFileService blaiseFileService)
+        public CommandService(IBlaiseFileService blaiseFileService, IBlaiseQuestionnaireService blaiseQuestionnaireService)
         {
             _blaiseFileService = blaiseFileService;
+            _blaiseQuestionnaireService = blaiseQuestionnaireService;
         }
 
         public int ParseArguments(string[] args)
@@ -25,10 +27,11 @@ namespace Blaise.Cli.Core.Services
                 with.HelpWriter = Console.Out;
             });
 
-            return parser.ParseArguments<DataInterfaceOptions, DataDeliveryOptions>(args)
+            return parser.ParseArguments<DataInterfaceOptions, DataDeliveryOptions, QuestionnaireOptions>(args)
               .MapResult(
                   (DataInterfaceOptions opts) => CreateDataInterface(opts),
                   (DataDeliveryOptions opts) => UpdateQuestionnairePackageWithData(opts),
+                  (QuestionnaireOptions opts) => InstallQuestionnaire(opts),
                   errors => 1);
         }
 
@@ -45,6 +48,13 @@ namespace Blaise.Cli.Core.Services
             var auditOption = Convert.ToBoolean(options.Audit);
             _blaiseFileService.UpdateQuestionnairePackageWithData(options.ServerParkName, options.QuestionnaireName,
                 options.File, auditOption);
+
+            return 0;
+        }
+
+        private int InstallQuestionnaire(QuestionnaireOptions options)
+        {
+            _blaiseQuestionnaireService.InstallQuestionnaire(options.QuestionnaireName, options.ServerParkName, options.QuestionnaireFile);
 
             return 0;
         }

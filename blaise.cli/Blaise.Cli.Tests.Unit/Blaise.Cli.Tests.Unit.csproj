@@ -148,6 +148,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\BlaiseQuestionnaireServiceTests.cs" />
     <Compile Include="Services\CommandServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BlaiseFileServiceTests.cs" />

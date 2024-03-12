@@ -195,21 +195,6 @@ namespace Blaise.Cli.Tests.Unit.Services
         }
 
         [Test]
-        public void Given_We_Pass_QuestionnaireInstall_Audit_Arguments_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments()
-        {
-            //Arrange
-            _auditOptions = true;
-            var args = new[] { "questionnaireinstall", "-q", _questionnaireName, "-s", _serverParkName, "-f", _fileName };
-
-            //Act
-            _sut.ParseArguments(args);
-
-            //Assert
-            var audit = bool.Parse(_auditOptions.ToString());
-            _blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName));
-        }
-
-        [Test]
         public void Given_We_Pass_QuestionnaireInstall_Arguments_With_FullNames_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments()
         {
             //Arrange

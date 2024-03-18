@@ -4,15 +4,14 @@ using Blaise.Nuget.Api.Contracts.Enums;
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using Moq;
 using NUnit.Framework;
-using StatNeth.Blaise.API.DataInterface;
 using System;
-using System.Security.Policy;
 
 namespace Blaise.Cli.Tests.Unit.Services
 {
     public class BlaiseQuestionnaireServiceTests
     {
         private Mock<IBlaiseQuestionnaireApi> _blaiseQuestionnaireApi;
+        private Mock<IBlaiseFileApi> _blaiseFileApi;
         private IBlaiseQuestionnaireService _sut;
 
         private readonly string _serverParkName = "gusty";
@@ -23,7 +22,8 @@ namespace Blaise.Cli.Tests.Unit.Services
         public void SetupTests()
         {
             _blaiseQuestionnaireApi = new Mock<IBlaiseQuestionnaireApi>();
-            _sut = new BlaiseQuestionnaireService(_blaiseQuestionnaireApi.Object);
+            _blaiseFileApi = new Mock<IBlaiseFileApi>();
+            _sut = new BlaiseQuestionnaireService(_blaiseQuestionnaireApi.Object, _blaiseFileApi.Object);
         }
 
         [Test]
@@ -33,6 +33,7 @@ namespace Blaise.Cli.Tests.Unit.Services
             _sut.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName);
 
             //assert
+            _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithSqlConnection(_questionnaireName, _fileName), Times.Once);
             _blaiseQuestionnaireApi.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, 
                 _fileName, QuestionnaireInterviewType.Capi), Times.Once);
         }

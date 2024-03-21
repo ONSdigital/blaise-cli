@@ -139,5 +139,35 @@ namespace Blaise.Cli.Tests.Unit.Services
             Assert.IsNotNull(exception);
             Assert.AreEqual("Value cannot be null.\r\nParameter name: fileName", exception.Message);
         }
+
+        [Test]
+        public void Given_We_Have_Passed_Valid_Parameters_When_We_Call_UpdateQuestionnaireFileWithSqlConnection_Then_The_Correct_API_Call_Is_Made()
+        {
+            //act
+            _sut.UpdateQuestionnaireFileWithSqlConnection(_fileName);
+
+            //assert
+            _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithSqlConnection(_questionnaireName, _fileName), Times.Once);
+        }
+
+        [Test]
+        public void Given_We_Have_Called_UpdateQuestionnaireFileWithSqlConnection_When_We_have_supplied_An_Empty_FileName_Then_An_Error_Is_Thrown()
+        {
+            //act && assert
+            var exception = Assert.Throws<ArgumentException>(() => _sut.UpdateQuestionnaireFileWithSqlConnection(string.Empty));
+
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("A value for the argument 'fileName' must be supplied", exception.Message);
+        }
+
+        [Test]
+        public void Given_We_Have_Called_UpdateQuestionnaireFileWithSqlConnection_When_We_have_supplied_A_Null_Value_For_FileName_Then_An_Error_Is_Thrown()
+        {
+            //act && assert
+            var exception = Assert.Throws<ArgumentNullException>(() => _sut.UpdateQuestionnaireFileWithSqlConnection(null));
+
+            Assert.IsNotNull(exception);
+            Assert.AreEqual("Value cannot be null.\r\nParameter name: fileName", exception.Message);
+        }
     }
 }

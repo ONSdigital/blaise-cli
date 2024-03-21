@@ -21,6 +21,8 @@ namespace Blaise.Cli
                     .AddSingleton<ICommandService, CommandService>()
                     .AddTransient<IBlaiseFileService, BlaiseFileService>()
                     .AddTransient<IBlaiseFileApi, BlaiseFileApi>()
+                    .AddTransient<IBlaiseQuestionnaireService, BlaiseQuestionnaireService>()
+                    .AddTransient<IBlaiseQuestionnaireApi, BlaiseQuestionnaireApi>()
                     .BuildServiceProvider();
 
                 var commandService = serviceProvider.GetService<ICommandService>();

@@ -160,6 +160,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\FileNameExtensions.cs" />
     <Compile Include="Interfaces\IBlaiseQuestionnaireService.cs" />
     <Compile Include="Models\QuestionnaireOptions.cs" />
     <Compile Include="Services\BlaiseQuestionnaireService.cs" />

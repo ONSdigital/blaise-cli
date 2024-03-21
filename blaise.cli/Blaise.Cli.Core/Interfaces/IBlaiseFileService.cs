@@ -6,7 +6,10 @@ namespace Blaise.Cli.Core.Interfaces
     {
         void CreateDataInterfaceFile(ApplicationType applicationType, string fileName);
 
-        void UpdateQuestionnairePackageWithData(string serverParkName, string questionnaireName
-            , string questionnaireFile, bool auditOption = false);
+        void UpdateQuestionnairePackageWithData(string serverParkName, string questionnaireName, 
+            string questionnaireFile, bool auditOption = false);
+
+        void UpdateQuestionnaireFileWithSqlConnection(string questionnaireFile);
+
     }
 }

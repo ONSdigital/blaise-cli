@@ -1,4 +1,5 @@
-﻿using Blaise.Cli.Core.Extensions;
+﻿using System.IO;
+using Blaise.Cli.Core.Extensions;
 using Blaise.Cli.Core.Interfaces;
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using StatNeth.Blaise.API.DataInterface;
@@ -27,6 +28,16 @@ namespace Blaise.Cli.Core.Services
             fileName.ThrowExceptionIfNullOrEmpty("fileName");
 
             _blaiseFileApi.UpdateQuestionnaireFileWithData(serverParkName, questionnaireName, fileName, auditOption);
+        }
+
+        public void UpdateQuestionnaireFileWithSqlConnection(string fileName)
+        {
+            fileName.ThrowExceptionIfNullOrEmpty("fileName");
+            var questionnaireName = fileName.GetQuestionnaireNameFromFile();
+
+            _blaiseFileApi.UpdateQuestionnaireFileWithSqlConnection(
+                questionnaireName,
+                fileName);
         }
     }
 }

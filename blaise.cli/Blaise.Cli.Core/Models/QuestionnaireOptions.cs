@@ -2,7 +2,7 @@
 
 namespace Blaise.Cli.Core.Models
 {
-    [Verb("questionnaireinstall", HelpText = "Data delivery pipeline options")]
+    [Verb("questionnaireinstall", HelpText = "Questionnaire install options")]
     public class QuestionnaireOptions
     {
         [Option('q', "questionnaireName", Required = true, HelpText = "The name of the questionnaire")]

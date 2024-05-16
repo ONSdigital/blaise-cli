@@ -71,6 +71,38 @@ namespace Blaise.Cli.Tests.Unit.Services
         }
 
         [Test]
+        public void Given_We_Have_Passed_Valid_Parameters_When_We_Call_UpdateQuestionnairePackageWithData_With_No_Options_Then_The_Correct_API_Call_Is_Made()
+        {
+            //act
+            _sut.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName);
+
+            //assert
+            _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithData(_serverParkName, _questionnaireName, _fileName, false), Times.Once);
+        }
+
+        [TestCase(true)]
+        [TestCase(false)]
+        public void Given_We_Have_Passed_Valid_Parameters_When_We_Call_UpdateQuestionnairePackageWithData_With_No_Audit_Options_Then_The_Correct_API_Call_Is_Made(bool auditOption)
+        {
+            //act
+            _sut.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName, auditOption);
+
+            //assert
+            _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithData(_serverParkName, _questionnaireName, _fileName, auditOption), Times.Once);
+        }
+
+        [TestCase(true, 10)]
+        [TestCase(false, 20)]
+        public void Given_We_Have_Passed_Valid_Parameters_When_We_Call_UpdateQuestionnairePackageWithData_With_Batch_Size_Options_Then_The_Correct_API_Call_Is_Made(bool auditOption, int batchSize)
+        {
+            //act
+            _sut.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName, auditOption, batchSize);
+
+            //assert
+            _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithBatchedData(_serverParkName, _questionnaireName, _fileName, batchSize, auditOption), Times.Once);
+        }
+
+        [Test]
         public void Given_We_Have_Passed_Valid_Parameters_When_We_Call_UpdateQuestionnairePackageWithData_Then_The_Correct_API_Call_Is_Made()
         {
             //act

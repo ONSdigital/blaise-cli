@@ -30,6 +30,7 @@ namespace Blaise.Cli.Core.Services
             if (batchSize > 0)
             {
                 _blaiseFileApi.UpdateQuestionnaireFileWithBatchedData(serverParkName, questionnaireName, fileName, batchSize, auditOption);
+                return;
             }
 
             _blaiseFileApi.UpdateQuestionnaireFileWithData(serverParkName, questionnaireName, fileName, auditOption);

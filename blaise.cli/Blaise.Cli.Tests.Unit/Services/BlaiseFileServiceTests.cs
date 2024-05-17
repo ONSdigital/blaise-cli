@@ -89,6 +89,7 @@ namespace Blaise.Cli.Tests.Unit.Services
 
             //assert
             _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithData(_serverParkName, _questionnaireName, _fileName, auditOption), Times.Once);
+            _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithBatchedData(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<bool>()), Times.Never);
         }
 
         [TestCase(true, 10)]
@@ -100,6 +101,7 @@ namespace Blaise.Cli.Tests.Unit.Services
 
             //assert
             _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithBatchedData(_serverParkName, _questionnaireName, _fileName, batchSize, auditOption), Times.Once);
+            _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithData(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>()), Times.Never);
         }
 
         [Test]

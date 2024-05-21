@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Blaise.Cli.Core.Extensions;
+﻿using Blaise.Cli.Core.Extensions;
 using Blaise.Cli.Core.Interfaces;
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using StatNeth.Blaise.API.DataInterface;
@@ -21,11 +20,17 @@ namespace Blaise.Cli.Core.Services
             _blaiseFileApi.CreateSettingsDataInterfaceFile(applicationType, fileName);
         }
 
-        public void UpdateQuestionnairePackageWithData(string serverParkName, string questionnaireName, string fileName, bool auditOption = false)
+        public void UpdateQuestionnairePackageWithData(string serverParkName, string questionnaireName, string fileName, bool auditOption = false, int batchSize = 0)
         {
             serverParkName.ThrowExceptionIfNullOrEmpty("serverParkName");
             questionnaireName.ThrowExceptionIfNullOrEmpty("questionnaireName");
             fileName.ThrowExceptionIfNullOrEmpty("fileName");
+
+            if (batchSize > 0)
+            {
+                _blaiseFileApi.UpdateQuestionnaireFileWithBatchedData(serverParkName, questionnaireName, fileName, batchSize, auditOption);
+                return;
+            }
 
             _blaiseFileApi.UpdateQuestionnaireFileWithData(serverParkName, questionnaireName, fileName, auditOption);
         }

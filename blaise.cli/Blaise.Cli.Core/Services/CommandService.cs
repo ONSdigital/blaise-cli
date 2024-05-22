@@ -45,9 +45,8 @@ namespace Blaise.Cli.Core.Services
 
         private int UpdateQuestionnairePackageWithData(DataDeliveryOptions options)
         {
-            var auditOption = Convert.ToBoolean(options.Audit);
             _blaiseFileService.UpdateQuestionnairePackageWithData(options.ServerParkName, options.QuestionnaireName,
-                options.File, auditOption);
+                options.File, Convert.ToBoolean(options.Audit), Convert.ToInt32(options.BatchSize));
 
             return 0;
         }

@@ -16,5 +16,8 @@ namespace Blaise.Cli.Core.Models
 
         [Option('a', "audit", HelpText = "The audit trail data for the questionnaire")]
         public string Audit { get; set; } = "false";
+
+        [Option('b', "batchSize", HelpText = "The number of cases to use for batching")]
+        public string BatchSize { get; set; } = "0";
     }
 }

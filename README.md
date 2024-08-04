@@ -57,7 +57,7 @@ Use the command `datadelivery` with the following parameters:
 
  ## Installing questionnaires
 
- Installs a Blaise questionnaire package into a Blaise environment. Used to install test questionnaire for integration tests and to install the CMA packages during Blaise configuration.
+ Installs a Blaise questionnaire package into a Blaise environment. Used to install CMA packages during Blaise configuration.
 
 Use the command `questionnaireinstall` with the following parameters:
 

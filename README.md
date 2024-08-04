@@ -26,8 +26,8 @@ Use the command `datainterface` with the following parameters:
 
 | Long | Short | Description |
 | --- | --- | --- |
-| --type | -t | Type of data interface file to be created |
-| --file | -f | File name of data interface file to be created |
+| type | t | Type of data interface file to be created |
+| file | f | File name of data interface file to be created |
 
 Long parameter example:
 

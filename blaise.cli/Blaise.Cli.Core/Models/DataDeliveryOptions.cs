@@ -2,19 +2,19 @@
 
 namespace Blaise.Cli.Core.Models
 {
-    [Verb("datadelivery", HelpText = "Data delivery pipeline options")]
+    [Verb("datadelivery", HelpText = "Data delivery options")]
     public class DataDeliveryOptions
     {
-        [Option('s', "serverParkName", Required = true, HelpText = "The name of the server park that houses the questionnaire data")]
+        [Option('s', "serverParkName", Required = true, HelpText = "Name of the server park that houses the questionnaire to be delivered")]
         public string ServerParkName { get; set; }
 
-        [Option('q', "questionnaireName", Required = true, HelpText = "The name of the questionnaire")]
+        [Option('q', "questionnaireName", Required = true, HelpText = "Name of the questionnaire to be delivered")]
         public string QuestionnaireName { get; set; }
 
-        [Option('f', "file", Required = true, HelpText = "The package file containing the questionnaire file")]
+        [Option('f', "file", Required = true, HelpText = "File name of the questionnaire package to be delivered")]
         public string File { get; set; }
 
-        [Option('a', "audit", HelpText = "The audit trail data for the questionnaire")]
+        [Option('a', "audit", HelpText = "Option to include audit trail data as part of the delivery")]
         public string Audit { get; set; } = "false";
 
         [Option('b', "batchSize", HelpText = "The number of cases to use for batching")]

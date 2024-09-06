@@ -1,9 +1,12 @@
 ﻿using System;
 using Blaise.Cli.Core.Interfaces;
 using Blaise.Cli.Core.Services;
+using Blaise.Nuget.Api.Contracts.Enums;
+using Blaise.Nuget.Api.Contracts.Models;
 using Moq;
 using NUnit.Framework;
 using StatNeth.Blaise.API.DataInterface;
+using StatNeth.Blaise.API.ServerManager;
 
 namespace Blaise.Cli.Tests.Unit.Services
 {
@@ -16,6 +19,13 @@ namespace Blaise.Cli.Tests.Unit.Services
         private readonly string _serverParkName = "gusty";
         private readonly string _questionnaireName = "OPN2101A";
         private readonly string _fileName = "OPN2101A.bpkg";
+        private readonly IInstallOptions _questionnaireInstallOptions = new InstallOptions
+        {
+            DataEntrySettingsName = QuestionnaireDataEntryType.StrictInterviewing.ToString(),
+            InitialAppLayoutSetGroupName = QuestionnaireInterviewType.Cati.FullName(),
+            LayoutSetGroupName = QuestionnaireInterviewType.Cati.FullName(),
+            OverwriteMode = DataOverwriteMode.Always,
+        };
 
         [SetUp]
         public void SetupTests()

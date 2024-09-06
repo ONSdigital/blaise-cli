@@ -53,7 +53,7 @@ namespace Blaise.Cli.Core.Services
 
         private int InstallQuestionnaire(QuestionnaireOptions options)
         {
-            _blaiseQuestionnaireService.InstallQuestionnaire(options.QuestionnaireName, options.ServerParkName, options.QuestionnaireFile);
+            _blaiseQuestionnaireService.InstallQuestionnaire(options.QuestionnaireName, options.ServerParkName, options.QuestionnaireFile, options.InstallOptions);
 
             return 0;
         }

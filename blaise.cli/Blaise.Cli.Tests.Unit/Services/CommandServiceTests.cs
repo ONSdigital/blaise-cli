@@ -2,6 +2,7 @@
 using Blaise.Cli.Core.Interfaces;
 using Blaise.Cli.Core.Services;
 using Blaise.Nuget.Api.Contracts.Enums;
+using Blaise.Nuget.Api.Contracts.Extensions;
 using Blaise.Nuget.Api.Contracts.Models;
 using Moq;
 using NUnit.Framework;
@@ -233,7 +234,7 @@ namespace Blaise.Cli.Tests.Unit.Services
             _sut.ParseArguments(args);
 
             //Assert
-            _blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName));
+            _blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName, _questionnaireInstallOptions));
         }
 
         [Test]
@@ -245,7 +246,7 @@ namespace Blaise.Cli.Tests.Unit.Services
             _sut.ParseArguments(args);
 
             //Assert
-            _blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName));
+            _blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName, _questionnaireInstallOptions));
         }
 
         [Test]

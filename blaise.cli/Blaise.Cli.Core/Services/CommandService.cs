@@ -2,6 +2,7 @@
 using Blaise.Cli.Core.Models;
 using CommandLine;
 using System;
+using System.Linq;
 // ReSharper disable All
 
 namespace Blaise.Cli.Core.Services
@@ -27,7 +28,11 @@ namespace Blaise.Cli.Core.Services
                 with.HelpWriter = Console.Out;
             });
 
-            return parser.ParseArguments<DataInterfaceOptions, DataDeliveryOptions, QuestionnaireOptions>((System.Collections.Generic.IEnumerable<string>)args)
+            var stringArgs = args.Cast<object>()
+                    .Where(item => item is string)
+                    .Select(item => (string)item);
+
+            return parser.ParseArguments<DataInterfaceOptions, DataDeliveryOptions, QuestionnaireOptions>(stringArgs)
               .MapResult(
                   (DataInterfaceOptions opts) => CreateDataInterface(opts),
                   (DataDeliveryOptions opts) => UpdateQuestionnairePackageWithData(opts),

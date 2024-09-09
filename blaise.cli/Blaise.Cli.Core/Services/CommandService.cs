@@ -17,7 +17,7 @@ namespace Blaise.Cli.Core.Services
             _blaiseQuestionnaireService = blaiseQuestionnaireService;
         }
 
-        public int ParseArguments(string[] args)
+        public int ParseArguments(object[] args)
         {
             var parser = new Parser(with =>
             {
@@ -27,7 +27,7 @@ namespace Blaise.Cli.Core.Services
                 with.HelpWriter = Console.Out;
             });
 
-            return parser.ParseArguments<DataInterfaceOptions, DataDeliveryOptions, QuestionnaireOptions>(args)
+            return parser.ParseArguments<DataInterfaceOptions, DataDeliveryOptions, QuestionnaireOptions>((System.Collections.Generic.IEnumerable<string>)args)
               .MapResult(
                   (DataInterfaceOptions opts) => CreateDataInterface(opts),
                   (DataDeliveryOptions opts) => UpdateQuestionnairePackageWithData(opts),

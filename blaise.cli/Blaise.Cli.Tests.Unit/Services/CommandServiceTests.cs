@@ -228,7 +228,7 @@ namespace Blaise.Cli.Tests.Unit.Services
         public void Given_We_Pass_QuestionnaireInstall_Arguments_When_We_Call_ParseArgument_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments()
         {
             //Arrange
-            var args = new[] { "questionnaireinstall", "-q", _questionnaireName, "-s", _serverParkName, "-f", _fileName };
+            var args = new object[] { "questionnaireinstall", "-q", _questionnaireName, "-s", _serverParkName, "-f", _fileName, "-i", _questionnaireInstallOptions };
 
             //Act
             _sut.ParseArguments(args);
@@ -241,7 +241,7 @@ namespace Blaise.Cli.Tests.Unit.Services
         public void Given_We_Pass_QuestionnaireInstall_Arguments_With_FullNames_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments()
         {
             //Arrange
-            var args = new[] { "questionnaireinstall", "--serverParkName", _serverParkName, "--questionnaireName", _questionnaireName, "--questionnaireFile", _fileName };
+            var args = new object[] { "questionnaireinstall", "--serverParkName", _serverParkName, "--questionnaireName", _questionnaireName, "--questionnaireFile", _fileName, "--installOptions", _questionnaireInstallOptions  };
             //Act
             _sut.ParseArguments(args);
 

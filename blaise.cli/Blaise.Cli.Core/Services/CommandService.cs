@@ -28,9 +28,7 @@ namespace Blaise.Cli.Core.Services
                 with.HelpWriter = Console.Out;
             });
 
-            var stringArgs = args.Cast<object>()
-                    .Where(item => item is string)
-                    .Select(item => (string)item);
+            var stringArgs = args.OfType<string>();
 
             return parser.ParseArguments<DataInterfaceOptions, DataDeliveryOptions, QuestionnaireOptions>(stringArgs)
               .MapResult(

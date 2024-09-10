@@ -2,6 +2,6 @@
 {
     public interface ICommandService
     {
-        int ParseArguments(object[] args);
+        int ParseArguments(string[] args);
     }
 }

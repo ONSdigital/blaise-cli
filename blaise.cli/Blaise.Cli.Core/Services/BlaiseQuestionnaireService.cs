@@ -5,6 +5,9 @@ using Blaise.Nuget.Api.Contracts.Interfaces;
 using Blaise.Nuget.Api.Contracts.Enums;
 using Blaise.Nuget.Api.Contracts.Models;
 using StatNeth.Blaise.API.ServerManager;
+using System.Linq;
+using StatNeth.Blaise.Shared.Util;
+using Newtonsoft.Json;
 
 namespace Blaise.Cli.Core.Services
 {
@@ -21,14 +24,14 @@ namespace Blaise.Cli.Core.Services
             _blaiseFileApi = blaiseFileApi;
         } 
 
-        public void InstallQuestionnaire(string questionnaireName, string serverParkName,  string questionnaireFile, IInstallOptions installOptions)
+        public void InstallQuestionnaire(string questionnaireName, string serverParkName,  string questionnaireFile, string installOptions)
         {
             questionnaireName.ThrowExceptionIfNullOrEmpty("questionnaireName");
             serverParkName.ThrowExceptionIfNullOrEmpty("serverParkName");
             questionnaireFile.ThrowExceptionIfNullOrEmpty("questionnaireFile");
 
             _blaiseFileApi.UpdateQuestionnaireFileWithSqlConnection(questionnaireName, questionnaireFile);
-            _blaiseQuestionnaireApi.InstallQuestionnaire(questionnaireName, serverParkName, questionnaireFile, installOptions);
+            _blaiseQuestionnaireApi.InstallQuestionnaire(questionnaireName, serverParkName, questionnaireFile, JsonConvert.DeserializeObject<IInstallOptions>(installOptions));
         }
         
     }

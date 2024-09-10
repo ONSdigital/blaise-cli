@@ -18,7 +18,7 @@ namespace Blaise.Cli.Core.Services
             _blaiseQuestionnaireService = blaiseQuestionnaireService;
         }
 
-        public int ParseArguments(object[] args)
+        public int ParseArguments(string[] args)
         {
             var parser = new Parser(with =>
             {
@@ -28,9 +28,7 @@ namespace Blaise.Cli.Core.Services
                 with.HelpWriter = Console.Out;
             });
 
-            var stringArgs = args.OfType<string>();
-
-            return parser.ParseArguments<DataInterfaceOptions, DataDeliveryOptions, QuestionnaireOptions>(stringArgs)
+            return parser.ParseArguments<DataInterfaceOptions, DataDeliveryOptions, QuestionnaireOptions>(args)
               .MapResult(
                   (DataInterfaceOptions opts) => CreateDataInterface(opts),
                   (DataDeliveryOptions opts) => UpdateQuestionnairePackageWithData(opts),
@@ -56,7 +54,7 @@ namespace Blaise.Cli.Core.Services
 
         private int InstallQuestionnaire(QuestionnaireOptions options)
         {
-            _blaiseQuestionnaireService.InstallQuestionnaire(options.QuestionnaireName, options.ServerParkName, options.QuestionnaireFile, options.InstallOptions);
+            _blaiseQuestionnaireService.InstallQuestionnaire(options.QuestionnaireName, options.ServerParkName, options.QuestionnaireFile, Convert.ToString(options.InstallOptions));
 
             return 0;
         }

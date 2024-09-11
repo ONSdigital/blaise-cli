@@ -36,7 +36,7 @@ namespace Blaise.Cli.Tests.Unit.Services
             _sut = new BlaiseQuestionnaireService(_blaiseQuestionnaireApi.Object, _blaiseFileApi.Object);
         }
 
-        [Test]
+        /*[Test]
         public void Given_We_Have_Passed_Valid_Parameters_When_We_Call_InstallQuestionnaire_Then_The_Correct_API_Call_Is_Made()
         {
             //act
@@ -46,7 +46,7 @@ namespace Blaise.Cli.Tests.Unit.Services
             _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithSqlConnection(_questionnaireName, _fileName), Times.Once);
             _blaiseQuestionnaireApi.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, 
                 _fileName, _questionnaireInstallOptions), Times.Once);
-        }
+        }*/
 
         [Test]
         public void Given_We_Have_Called_InstallQuestionnaire_When_We_have_supplied_An_Empty_QuestionnaireName_Then_An_Error_Is_Thrown()

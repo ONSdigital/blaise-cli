@@ -15,7 +15,7 @@ namespace Blaise.Cli.Core.Models
         [Option('f', "questionnaireFile", Required = true, HelpText = "File name of the questionnaire package to be installed")]
         public string QuestionnaireFile { get; set; }
 
-        [Option('i', "installOptions", Required = true, HelpText = "Install options for Blaise Server Manager")]
+        [Option('i', "installOptions", Required = false, HelpText = "Install options for Blaise Server Manager")]
         public IInstallOptions InstallOptions { get; set; }
     }
 }

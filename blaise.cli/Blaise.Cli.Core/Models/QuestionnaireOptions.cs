@@ -17,8 +17,9 @@ namespace Blaise.Cli.Core.Models
         [Option('f', "questionnaireFile", Required = true, HelpText = "File name of the questionnaire package to be installed")]
         public string QuestionnaireFile { get; set; }
 
-        [Option('i', "installOptions", Required = true, HelpText = "Install options for Blaise Server Manager")]
-        public string InstallOptions { get; set; }
+        [Option('i', "installOptions", Required = false, Default = "{\"LayoutSetGroupName\":\"CAPI\",\"DataEntrySettingsName\":\"StrictInterviewing\",\"OverwriteMode\":2,\"HarmlessDataModificationMode\":1,\"GeneratePages\":false,\"RemoveSessions\":true,\"InitialAppCariSetting\":\"\",\"Orientation\":1,\"InitialAppDataEntrySettingsName\":\"\",\"InitialModeName\":\"\",\"EnableClose\":true,\"EncryptDataFiles\":true,\"DownloadSessionData\":false,\"UploadSessionData\":false,\"AllowDownloadOverMeteredConnection\":false,\"InitialAppLayoutSetGroupName\":\"CAPI\",\"DataConversionMode\":0}", HelpText = "Install options for Blaise Server Manager")]
+
+    public string InstallOptions { get; set; }
 
         // This property will hold the deserialized object
         public InstallOptions ParsedObject { get; set; }

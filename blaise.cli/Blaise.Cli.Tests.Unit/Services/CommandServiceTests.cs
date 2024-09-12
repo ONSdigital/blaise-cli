@@ -239,12 +239,6 @@ namespace Blaise.Cli.Tests.Unit.Services
             Assert.AreEqual(1, result);
         }
 
-        public string Get_questionnaireInstallOptions()
-        {
-            return JsonConvert.SerializeObject(_questionnaireInstallOptions);
-        }
-
-
         /*[Test]
         public void Given_We_Pass_QuestionnaireInstall_Arguments_When_We_Call_ParseArgument_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments()
         {

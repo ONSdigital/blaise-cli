@@ -1,4 +1,6 @@
-﻿using CommandLine;
+﻿using Blaise.Nuget.Api.Contracts.Models;
+using CommandLine;
+using Newtonsoft.Json;
 using StatNeth.Blaise.API.ServerManager;
 
 namespace Blaise.Cli.Core.Models
@@ -16,6 +18,15 @@ namespace Blaise.Cli.Core.Models
         public string QuestionnaireFile { get; set; }
 
         [Option('i', "installOptions", Required = true, HelpText = "Install options for Blaise Server Manager")]
-        public IInstallOptions InstallOptions { get; set; }
+        public string InstallOptions { get; set; }
+
+        // This property will hold the deserialized object
+        public InstallOptions ParsedObject { get; set; }
+
+        // Method to deserialize the object from JSON string after parsing command-line args
+        public void DeserializeObject()
+        {
+            ParsedObject = JsonConvert.DeserializeObject<InstallOptions>(InstallOptions);
+        }
     }
 }

@@ -24,14 +24,14 @@ namespace Blaise.Cli.Core.Services
             _blaiseFileApi = blaiseFileApi;
         } 
 
-        public void InstallQuestionnaire(string questionnaireName, string serverParkName,  string questionnaireFile, string installOptions)
+        public void InstallQuestionnaire(string questionnaireName, string serverParkName,  string questionnaireFile, InstallOptions installOptions)
         {
             questionnaireName.ThrowExceptionIfNullOrEmpty("questionnaireName");
             serverParkName.ThrowExceptionIfNullOrEmpty("serverParkName");
             questionnaireFile.ThrowExceptionIfNullOrEmpty("questionnaireFile");
-
+           
             _blaiseFileApi.UpdateQuestionnaireFileWithSqlConnection(questionnaireName, questionnaireFile);
-            _blaiseQuestionnaireApi.InstallQuestionnaire(questionnaireName, serverParkName, questionnaireFile, JsonConvert.DeserializeObject<IInstallOptions>(installOptions));
+            _blaiseQuestionnaireApi.InstallQuestionnaire(questionnaireName, serverParkName, questionnaireFile, installOptions);
         }
         
     }

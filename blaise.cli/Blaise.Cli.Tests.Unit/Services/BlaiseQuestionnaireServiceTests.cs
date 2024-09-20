@@ -39,7 +39,6 @@ namespace Blaise.Cli.Tests.Unit.Services
             DownloadSessionData = false,
             UploadSessionData = false,
             AllowDownloadOverMeteredConnection = false,
-            DataConversionMode = DataConversionMode.None
         };
 
         [SetUp]

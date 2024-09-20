@@ -1,7 +1,9 @@
 ﻿using Blaise.Cli.Core.Interfaces;
 using Blaise.Cli.Core.Models;
 using CommandLine;
+using Newtonsoft.Json;
 using System;
+using System.Linq;
 // ReSharper disable All
 
 namespace Blaise.Cli.Core.Services
@@ -28,11 +30,11 @@ namespace Blaise.Cli.Core.Services
             });
 
             return parser.ParseArguments<DataInterfaceOptions, DataDeliveryOptions, QuestionnaireOptions>(args)
-              .MapResult(
-                  (DataInterfaceOptions opts) => CreateDataInterface(opts),
-                  (DataDeliveryOptions opts) => UpdateQuestionnairePackageWithData(opts),
-                  (QuestionnaireOptions opts) => InstallQuestionnaire(opts),
-                  errors => 1);
+            .MapResult(
+                (DataInterfaceOptions opts) => CreateDataInterface(opts),
+                (DataDeliveryOptions opts) => UpdateQuestionnairePackageWithData(opts),
+                (QuestionnaireOptions opts) => InstallQuestionnaire(opts),
+                errors => 1);
         }
 
         private int CreateDataInterface(DataInterfaceOptions options)
@@ -53,7 +55,9 @@ namespace Blaise.Cli.Core.Services
 
         private int InstallQuestionnaire(QuestionnaireOptions options)
         {
-            _blaiseQuestionnaireService.InstallQuestionnaire(options.QuestionnaireName, options.ServerParkName, options.QuestionnaireFile);
+            options.DeserializeObject();
+            Console.WriteLine("hello"+ JsonConvert.SerializeObject(options.ParsedObject));
+            _blaiseQuestionnaireService.InstallQuestionnaire(options.QuestionnaireName, options.ServerParkName, options.QuestionnaireFile, options.ParsedObject );
 
             return 0;
         }

@@ -181,7 +181,7 @@ namespace Blaise.Cli.Tests.Unit.Services
             _sut.UpdateQuestionnaireFileWithSqlConnection(_fileName);
 
             //assert
-            _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithSqlConnection(_questionnaireName, _fileName), Times.Once);
+            _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithSqlConnection(_questionnaireName, _fileName, true), Times.Once);
         }
 
         [Test]

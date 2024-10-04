@@ -1,9 +1,9 @@
 ﻿using Blaise.Cli.Core.Interfaces;
 using Blaise.Cli.Core.Services;
-using Blaise.Nuget.Api.Contracts.Enums;
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using Moq;
 using NUnit.Framework;
+using StatNeth.Blaise.API.ServerManager;
 using System;
 
 namespace Blaise.Cli.Tests.Unit.Services
@@ -26,16 +26,17 @@ namespace Blaise.Cli.Tests.Unit.Services
             _sut = new BlaiseQuestionnaireService(_blaiseQuestionnaireApi.Object, _blaiseFileApi.Object);
         }
 
-        [Test]
-        public void Given_We_Have_Passed_Valid_Parameters_When_We_Call_InstallQuestionnaire_Then_The_Correct_API_Call_Is_Made()
+        [TestCase(true)]
+        [TestCase(false)]
+        public void Given_We_Have_Passed_Valid_Parameters_When_We_Call_InstallQuestionnaire_Then_The_Correct_API_Call_Is_Made(bool overwriteExistingData)
         {
             //act
-            _sut.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName);
+            _sut.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName, overwriteExistingData);
 
             //assert
-            _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithSqlConnection(_questionnaireName, _fileName), Times.Once);
+            _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithSqlConnection(_questionnaireName, _fileName, overwriteExistingData), Times.Once);
             _blaiseQuestionnaireApi.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, 
-                _fileName, QuestionnaireInterviewType.Capi), Times.Once);
+                _fileName, It.IsAny<IInstallOptions>()), Times.Once);
         }
 
         [Test]

@@ -13,5 +13,8 @@ namespace Blaise.Cli.Core.Models
 
         [Option('f', "questionnaireFile", Required = true, HelpText = "File name of the questionnaire package to be installed")]
         public string QuestionnaireFile { get; set; }
+
+        [Option('o', "overwriteExistingData", Required = false, Default = "true", HelpText = "Overwrite any existing questionnaire data for the package to be installed")]
+        public string OverwriteExistingData { get; set; }
     }
 }

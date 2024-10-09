@@ -53,7 +53,8 @@ namespace Blaise.Cli.Core.Services
 
         private int InstallQuestionnaire(QuestionnaireOptions options)
         {
-            _blaiseQuestionnaireService.InstallQuestionnaire(options.QuestionnaireName, options.ServerParkName, options.QuestionnaireFile);
+            var overwriteExistingData = Convert.ToBoolean(options.OverwriteExistingData);
+            _blaiseQuestionnaireService.InstallQuestionnaire(options.QuestionnaireName, options.ServerParkName, options.QuestionnaireFile, overwriteExistingData);
 
             return 0;
         }

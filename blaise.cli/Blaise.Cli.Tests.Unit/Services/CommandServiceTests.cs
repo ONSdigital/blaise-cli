@@ -213,29 +213,39 @@ namespace Blaise.Cli.Tests.Unit.Services
         }
 
 
-        [Test]
-        public void Given_We_Pass_QuestionnaireInstall_Arguments_When_We_Call_ParseArgument_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments()
+        [TestCase("true", true)]
+        [TestCase("True", true)]
+        [TestCase("TRUE", true)]
+        [TestCase("false", false)]
+        [TestCase("False", false)]
+        [TestCase("FALSE", false)]
+        public void Given_We_Pass_QuestionnaireInstall_Arguments_When_We_Call_ParseArgument_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments(string arg, bool value)
         {
             //Arrange
-            var args = new[] { "questionnaireinstall", "-q", _questionnaireName, "-s", _serverParkName, "-f", _fileName };
+            var args = new[] { "questionnaireinstall", "-q", _questionnaireName, "-s", _serverParkName, "-f", _fileName, "-o", arg };
 
             //Act
             _sut.ParseArguments(args);
 
             //Assert
-            _blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName));
+            _blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName, value));
         }
 
-        [Test]
-        public void Given_We_Pass_QuestionnaireInstall_Arguments_With_FullNames_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments()
+        [TestCase("true", true)]
+        [TestCase("True", true)]
+        [TestCase("TRUE", true)]
+        [TestCase("false", false)]
+        [TestCase("False", false)]
+        [TestCase("FALSE", false)]
+        public void Given_We_Pass_QuestionnaireInstall_Arguments_With_FullNames_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments(string arg, bool value)
         {
             //Arrange
-            var args = new[] { "questionnaireinstall", "--serverParkName", _serverParkName, "--questionnaireName", _questionnaireName, "--questionnaireFile", _fileName };
+            var args = new[] { "questionnaireinstall", "--serverParkName", _serverParkName, "--questionnaireName", _questionnaireName, "--questionnaireFile", _fileName, "--overwriteExistingData", arg };
             //Act
             _sut.ParseArguments(args);
 
             //Assert
-            _blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName));
+            _blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName, value));
         }
 
         [Test]

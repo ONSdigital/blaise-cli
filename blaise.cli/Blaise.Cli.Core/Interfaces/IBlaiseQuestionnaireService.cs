@@ -1,6 +1,4 @@
-﻿using Blaise.Nuget.Api.Contracts.Models;
-
-namespace Blaise.Cli.Core.Interfaces
+﻿namespace Blaise.Cli.Core.Interfaces
 {
     public interface IBlaiseQuestionnaireService
     {

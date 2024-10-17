@@ -2,12 +2,7 @@
 using Blaise.Cli.Core.Interfaces;
 using Blaise.Cli.Core.Extensions;
 using Blaise.Nuget.Api.Contracts.Interfaces;
-using Blaise.Nuget.Api.Contracts.Enums;
 using Blaise.Nuget.Api.Contracts.Models;
-using StatNeth.Blaise.API.ServerManager;
-using System.Linq;
-using StatNeth.Blaise.Shared.Util;
-using Newtonsoft.Json;
 
 namespace Blaise.Cli.Core.Services
 {

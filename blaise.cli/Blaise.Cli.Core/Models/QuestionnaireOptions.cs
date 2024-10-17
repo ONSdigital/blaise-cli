@@ -1,4 +1,7 @@
-﻿using CommandLine;
+﻿using Blaise.Nuget.Api.Contracts.Models;
+using CommandLine;
+using Newtonsoft.Json;
+using StatNeth.Blaise.API.ServerManager;
 
 namespace Blaise.Cli.Core.Models
 {

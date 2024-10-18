@@ -23,25 +23,6 @@ namespace Blaise.Cli.Tests.Unit.Services
         private readonly string _serverParkName = "gusty";
         private readonly string _questionnaireName = "OPN2101A";
         private readonly string _fileName = "OPN2101A.bpkg";
-        private readonly InstallOptions _questionnaireInstallOptions = new InstallOptions
-        {
-            DataEntrySettingsName = QuestionnaireDataEntryType.StrictInterviewing.ToString(),
-            InitialAppLayoutSetGroupName = QuestionnaireInterviewType.Cati.FullName(),
-            LayoutSetGroupName = QuestionnaireInterviewType.Cati.FullName(),
-            OverwriteMode = DataOverwriteMode.Always,
-            HarmlessDataModificationMode = HarmlessDataModificationMode.Always,
-            GeneratePages = false,
-            RemoveSessions = true,
-            InitialAppCariSetting = "",
-            Orientation = Orientation.Landscape,
-            InitialAppDataEntrySettingsName = "",
-            InitialModeName = "",
-            EnableClose = true,
-            EncryptDataFiles = true,
-            DownloadSessionData = false,
-            UploadSessionData = false,
-            AllowDownloadOverMeteredConnection = false,
-        };
 
         [SetUp]
         public void SetupTests()
@@ -238,35 +219,42 @@ namespace Blaise.Cli.Tests.Unit.Services
             Assert.AreEqual(1, result);
         }
 
-        [Test]
-        public void Given_We_Pass_QuestionnaireInstall_Arguments_When_We_Call_ParseArgument_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments()
+
+        [TestCase("true", true)]
+        [TestCase("True", true)]
+        [TestCase("TRUE", true)]
+        [TestCase("false", false)]
+        [TestCase("False", false)]
+        [TestCase("FALSE", false)]
+        public void Given_We_Pass_QuestionnaireInstall_Arguments_When_We_Call_ParseArgument_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments(string arg, bool value)
         {
 
             //Arrange
-            var args = new[] { "questionnaireinstall", "-q", _questionnaireName, "-s", _serverParkName, "-f", _fileName, "-i", JsonConvert.SerializeObject(_questionnaireInstallOptions) };
+            var args = new[] { "questionnaireinstall", "-q", _questionnaireName, "-s", _serverParkName, "-f", _fileName, "-o", arg };
 
             //Act
             var result = _sut.ParseArguments(args);
 
             //Assert
-            Assert.AreEqual(0, result);
-            /*_blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName, _questionnaireInstallOptions));*/
+            _blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName, value));
         }
 
-        [Test]
-        public void Given_We_Pass_QuestionnaireInstall_Arguments_With_FullNames_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments()
+        [TestCase("true", true)]
+        [TestCase("True", true)]
+        [TestCase("TRUE", true)]
+        [TestCase("false", false)]
+        [TestCase("False", false)]
+        [TestCase("FALSE", false)]
+        public void Given_We_Pass_QuestionnaireInstall_Arguments_With_FullNames_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments(string arg, bool value)
         {
 
             //Arrange
-            var args = new[] { "questionnaireinstall", "--questionnaireName", _questionnaireName, "--serverParkName", _serverParkName, "--questionnaireFile", _fileName, "--installOptions", JsonConvert.SerializeObject(_questionnaireInstallOptions) };
-        
+            var args = new[] { "questionnaireinstall", "--serverParkName", _serverParkName, "--questionnaireName", _questionnaireName, "--questionnaireFile", _fileName, "--overwriteExistingData", arg };
             //Act
             var result = _sut.ParseArguments(args);
 
             //Assert
-            Assert.AreEqual(0, result);
-            /*_blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName,
-                _fileName, _questionnaireInstallOptions));*/
+            _blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName, value));
         }
 
         [Test]

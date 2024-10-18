@@ -1,7 +1,4 @@
-﻿using Blaise.Nuget.Api.Contracts.Models;
-using CommandLine;
-using Newtonsoft.Json;
-using StatNeth.Blaise.API.ServerManager;
+﻿using CommandLine;
 
 namespace Blaise.Cli.Core.Models
 {
@@ -17,17 +14,7 @@ namespace Blaise.Cli.Core.Models
         [Option('f', "questionnaireFile", Required = true, HelpText = "File name of the questionnaire package to be installed")]
         public string QuestionnaireFile { get; set; }
 
-        [Option('i', "installOptions", Required = false, Default = "{\"LayoutSetGroupName\":\"CAPI\",\"DataEntrySettingsName\":\"StrictInterviewing\",\"OverwriteMode\":2,\"HarmlessDataModificationMode\":1,\"GeneratePages\":false,\"RemoveSessions\":true,\"InitialAppCariSetting\":\"\",\"Orientation\":1,\"InitialAppDataEntrySettingsName\":\"\",\"InitialModeName\":\"\",\"EnableClose\":true,\"EncryptDataFiles\":true,\"DownloadSessionData\":false,\"UploadSessionData\":false,\"AllowDownloadOverMeteredConnection\":false,\"InitialAppLayoutSetGroupName\":\"CAPI\",\"DataConversionMode\":0}", HelpText = "Install options for Blaise Server Manager")]
-
-    public string InstallOptions { get; set; }
-
-        // This property will hold the deserialized object
-        public InstallOptions ParsedObject { get; set; }
-
-        // Method to deserialize the object from JSON string after parsing command-line args
-        public void DeserializeObject()
-        {
-            ParsedObject = JsonConvert.DeserializeObject<InstallOptions>(InstallOptions);
-        }
+        [Option('o', "overwriteExistingData", Required = false, Default = "true", HelpText = "Overwrite any existing questionnaire data for the package to be installed")]
+        public string OverwriteExistingData { get; set; }
     }
 }

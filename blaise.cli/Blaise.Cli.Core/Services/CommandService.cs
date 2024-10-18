@@ -55,9 +55,8 @@ namespace Blaise.Cli.Core.Services
 
         private int InstallQuestionnaire(QuestionnaireOptions options)
         {
-            options.DeserializeObject();
-            Console.WriteLine("hello"+ JsonConvert.SerializeObject(options.ParsedObject));
-            _blaiseQuestionnaireService.InstallQuestionnaire(options.QuestionnaireName, options.ServerParkName, options.QuestionnaireFile, options.ParsedObject );
+            var overwriteExistingData = Convert.ToBoolean(options.OverwriteExistingData);
+            _blaiseQuestionnaireService.InstallQuestionnaire(options.QuestionnaireName, options.ServerParkName, options.QuestionnaireFile, overwriteExistingData);
 
             return 0;
         }

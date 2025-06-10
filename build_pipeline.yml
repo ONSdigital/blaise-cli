@@ -1,7 +1,7 @@
 ---
 trigger: none
 pool:
-  vmImage: windows-latest
+  vmImage: windows-2025
 variables:
   solutionPath: '**/*.sln'
   buildPlatform: Any CPU

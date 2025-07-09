@@ -41,12 +41,21 @@ stages:
           - script: dotnet --list-sdks
             displayName: Check .NET SDK version
 
-          - script: dotnet --list-runtimes
+                   - script: dotnet --list-runtimes
             displayName: Check .NET runtime versions
 
           - script: dotnet format --version
             displayName: Confirm dotnet-format version
 
+          - task: PowerShell@2
+            displayName: List all files in working directory
+            inputs:
+              targetType: inline
+              script: |
+                Write-Host "Current directory: $(Build.SourcesDirectory)"
+                Get-ChildItem -Path "$(Build.SourcesDirectory)" -Recurse -Force | ForEach-Object {
+                  Write-Host $_.FullName
+                }
           - task: PowerShell@2
             displayName: Check code formatting with dotnet-format
             inputs:

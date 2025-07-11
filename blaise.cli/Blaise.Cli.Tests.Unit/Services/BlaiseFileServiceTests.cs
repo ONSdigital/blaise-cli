@@ -1,10 +1,10 @@
-﻿using Blaise.Cli.Core.Interfaces;
+﻿using System;
+using Blaise.Cli.Core.Interfaces;
 using Blaise.Cli.Core.Services;
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using Moq;
 using NUnit.Framework;
 using StatNeth.Blaise.API.DataInterface;
-using System;
 
 namespace Blaise.Cli.Tests.Unit.Services
 {
@@ -33,10 +33,10 @@ namespace Blaise.Cli.Tests.Unit.Services
         [TestCase(ApplicationType.Session)]
         public void Given_We_Have_Passed_Valid_Parameters_When_We_Call_CreateDataInterfaceFile_Then_The_Correct_API_Call_Is_Made(ApplicationType applicationType)
         {
-            //act
+            // act
             _sut.CreateDataInterfaceFile(applicationType, _fileName);
 
-            //assert
+            // assert
             _blaiseFileApi.Verify(b => b.CreateSettingsDataInterfaceFile(applicationType, _fileName), Times.Once);
         }
 
@@ -48,7 +48,7 @@ namespace Blaise.Cli.Tests.Unit.Services
         [TestCase(ApplicationType.Session)]
         public void Given_We_Have_Called_CreateDataInterface_When_We_have_supplied_An_Empty_FileName_Then_An_Error_Is_Thrown(ApplicationType applicationType)
         {
-            //act && assert
+            // act && assert
             var exception = Assert.Throws<ArgumentException>(() => _sut.CreateDataInterfaceFile(applicationType, string.Empty));
 
             Assert.IsNotNull(exception);
@@ -63,7 +63,7 @@ namespace Blaise.Cli.Tests.Unit.Services
         [TestCase(ApplicationType.Session)]
         public void Given_We_Have_Called_CreateDataInterface_When_We_have_supplied_A_Null_Value_For_FileName_Then_An_Error_Is_Thrown(ApplicationType applicationType)
         {
-            //act && assert
+            // act && assert
             var exception = Assert.Throws<ArgumentNullException>(() => _sut.CreateDataInterfaceFile(applicationType, null));
 
             Assert.IsNotNull(exception);
@@ -73,10 +73,10 @@ namespace Blaise.Cli.Tests.Unit.Services
         [Test]
         public void Given_We_Have_Passed_Valid_Parameters_When_We_Call_UpdateQuestionnairePackageWithData_With_No_Options_Then_The_Correct_API_Call_Is_Made()
         {
-            //act
+            // act
             _sut.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName);
 
-            //assert
+            // assert
             _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithData(_serverParkName, _questionnaireName, _fileName, false), Times.Once);
         }
 
@@ -84,10 +84,10 @@ namespace Blaise.Cli.Tests.Unit.Services
         [TestCase(false)]
         public void Given_We_Have_Passed_Valid_Parameters_When_We_Call_UpdateQuestionnairePackageWithData_With_No_Audit_Options_Then_The_Correct_API_Call_Is_Made(bool auditOption)
         {
-            //act
+            // act
             _sut.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName, auditOption);
 
-            //assert
+            // assert
             _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithData(_serverParkName, _questionnaireName, _fileName, auditOption), Times.Once);
             _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithBatchedData(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<bool>()), Times.Never);
         }
@@ -96,10 +96,10 @@ namespace Blaise.Cli.Tests.Unit.Services
         [TestCase(false, 20)]
         public void Given_We_Have_Passed_Valid_Parameters_When_We_Call_UpdateQuestionnairePackageWithData_With_Batch_Size_Options_Then_The_Correct_API_Call_Is_Made(bool auditOption, int batchSize)
         {
-            //act
+            // act
             _sut.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName, auditOption, batchSize);
 
-            //assert
+            // assert
             _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithBatchedData(_serverParkName, _questionnaireName, _fileName, batchSize, auditOption), Times.Once);
             _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithData(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<bool>()), Times.Never);
         }
@@ -107,17 +107,17 @@ namespace Blaise.Cli.Tests.Unit.Services
         [Test]
         public void Given_We_Have_Passed_Valid_Parameters_When_We_Call_UpdateQuestionnairePackageWithData_Then_The_Correct_API_Call_Is_Made()
         {
-            //act
+            // act
             _sut.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName, _auditOptions);
 
-            //assert
+            // assert
             _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithData(_serverParkName, _questionnaireName, _fileName, _auditOptions), Times.Once);
         }
 
         [Test]
         public void Given_We_Have_Called_UpdateQuestionnairePackageWithData_When_We_have_supplied_An_Empty_ServerParkName_Then_An_Error_Is_Thrown()
         {
-            //act && assert
+            // act && assert
             var exception = Assert.Throws<ArgumentException>(() => _sut.UpdateQuestionnairePackageWithData(string.Empty, _questionnaireName, _fileName));
 
             Assert.IsNotNull(exception);
@@ -127,7 +127,7 @@ namespace Blaise.Cli.Tests.Unit.Services
         [Test]
         public void Given_We_Have_Called_UpdateQuestionnairePackageWithData_When_We_have_supplied_A_Null_Value_For_ServerParkName_Then_An_Error_Is_Thrown()
         {
-            //act && assert
+            // act && assert
             var exception = Assert.Throws<ArgumentNullException>(() => _sut.UpdateQuestionnairePackageWithData(null, _questionnaireName, _fileName));
 
             Assert.IsNotNull(exception);
@@ -137,7 +137,7 @@ namespace Blaise.Cli.Tests.Unit.Services
         [Test]
         public void Given_We_Have_Called_UpdateQuestionnairePackageWithData_When_We_have_supplied_An_Empty_QuestionnaireName_Then_An_Error_Is_Thrown()
         {
-            //act && assert
+            // act && assert
             var exception = Assert.Throws<ArgumentException>(() => _sut.UpdateQuestionnairePackageWithData(_serverParkName, string.Empty, _fileName));
 
             Assert.IsNotNull(exception);
@@ -147,7 +147,7 @@ namespace Blaise.Cli.Tests.Unit.Services
         [Test]
         public void Given_We_Have_Called_UpdateQuestionnairePackageWithData_When_We_have_supplied_A_Null_Value_For_QuestionnaireName_Then_An_Error_Is_Thrown()
         {
-            //act && assert
+            // act && assert
             var exception = Assert.Throws<ArgumentNullException>(() => _sut.UpdateQuestionnairePackageWithData(_serverParkName, null, _fileName));
 
             Assert.IsNotNull(exception);
@@ -157,7 +157,7 @@ namespace Blaise.Cli.Tests.Unit.Services
         [Test]
         public void Given_We_Have_Called_UpdateQuestionnairePackageWithData_When_We_have_supplied_An_Empty_FileName_Then_An_Error_Is_Thrown()
         {
-            //act && assert
+            // act && assert
             var exception = Assert.Throws<ArgumentException>(() => _sut.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, string.Empty));
 
             Assert.IsNotNull(exception);
@@ -167,7 +167,7 @@ namespace Blaise.Cli.Tests.Unit.Services
         [Test]
         public void Given_We_Have_Called_UpdateQuestionnairePackageWithData_When_We_have_supplied_A_Null_Value_For_FileName_Then_An_Error_Is_Thrown()
         {
-            //act && assert
+            // act && assert
             var exception = Assert.Throws<ArgumentNullException>(() => _sut.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, null));
 
             Assert.IsNotNull(exception);
@@ -177,17 +177,17 @@ namespace Blaise.Cli.Tests.Unit.Services
         [Test]
         public void Given_We_Have_Passed_Valid_Parameters_When_We_Call_UpdateQuestionnaireFileWithSqlConnection_Then_The_Correct_API_Call_Is_Made()
         {
-            //act
+            // act
             _sut.UpdateQuestionnaireFileWithSqlConnection(_fileName);
 
-            //assert
+            // assert
             _blaiseFileApi.Verify(b => b.UpdateQuestionnaireFileWithSqlConnection(_questionnaireName, _fileName, true), Times.Once);
         }
 
         [Test]
         public void Given_We_Have_Called_UpdateQuestionnaireFileWithSqlConnection_When_We_have_supplied_An_Empty_FileName_Then_An_Error_Is_Thrown()
         {
-            //act && assert
+            // act && assert
             var exception = Assert.Throws<ArgumentException>(() => _sut.UpdateQuestionnaireFileWithSqlConnection(string.Empty));
 
             Assert.IsNotNull(exception);
@@ -197,7 +197,7 @@ namespace Blaise.Cli.Tests.Unit.Services
         [Test]
         public void Given_We_Have_Called_UpdateQuestionnaireFileWithSqlConnection_When_We_have_supplied_A_Null_Value_For_FileName_Then_An_Error_Is_Thrown()
         {
-            //act && assert
+            // act && assert
             var exception = Assert.Throws<ArgumentNullException>(() => _sut.UpdateQuestionnaireFileWithSqlConnection(null));
 
             Assert.IsNotNull(exception);

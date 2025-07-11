@@ -1,11 +1,11 @@
-﻿using Blaise.Cli.Core.Interfaces;
+﻿using System;
+using System.Linq;
+using Blaise.Cli.Core.Interfaces;
 using Blaise.Cli.Core.Models;
 using CommandLine;
 using Newtonsoft.Json;
-using System;
-using System.Linq;
-// ReSharper disable All
 
+// ReSharper disable All
 namespace Blaise.Cli.Core.Services
 {
     public class CommandService : ICommandService

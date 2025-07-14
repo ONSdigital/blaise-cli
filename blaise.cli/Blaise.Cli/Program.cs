@@ -1,10 +1,10 @@
-﻿using Blaise.Cli.Core.Interfaces;
+﻿using System;
+using System.IO;
+using Blaise.Cli.Core.Interfaces;
 using Blaise.Cli.Core.Services;
 using Blaise.Nuget.Api.Api;
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.IO;
 
 namespace Blaise.Cli
 {
@@ -15,7 +15,7 @@ namespace Blaise.Cli
             try
             {
                 Console.WriteLine("Blaise ClI");
-                Console.WriteLine("");
+                Console.WriteLine(string.Empty);
 
                 var serviceProvider = new ServiceCollection()
                     .AddSingleton<ICommandService, CommandService>()

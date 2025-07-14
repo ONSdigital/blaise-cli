@@ -35,14 +35,14 @@ namespace Blaise.Cli.Tests.Unit.Services
         [Test]
         public void Given_We_Pass_DataDelivery_Arguments_With_No_Options_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments()
         {
-            //Arrange
-            var args = new [] { "datadelivery", "-s", _serverParkName, "-q", _questionnaireName, "-f", _fileName};
+            // Arrange
+            var args = new[] { "datadelivery", "-s", _serverParkName, "-q", _questionnaireName, "-f", _fileName };
 
-            //Act
+            // Act
             _sut.ParseArguments(args);
 
-            //Assert
-            _blaiseFileService.Verify(b => b.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName,false, 0));
+            // Assert
+            _blaiseFileService.Verify(b => b.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName, false, 0));
         }
 
         [TestCase("false")]
@@ -51,13 +51,13 @@ namespace Blaise.Cli.Tests.Unit.Services
         [TestCase("True")]
         public void Given_We_Pass_DataDelivery_Arguments_With_Audit_Options_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments(string auditOptions)
         {
-            //Arrange
-            var args = new [] { "datadelivery", "-s", _serverParkName, "-q", _questionnaireName, "-f", _fileName, "-a", auditOptions };
+            // Arrange
+            var args = new[] { "datadelivery", "-s", _serverParkName, "-q", _questionnaireName, "-f", _fileName, "-a", auditOptions };
 
-            //Act
+            // Act
             _sut.ParseArguments(args);
 
-            //Assert
+            // Assert
             _blaiseFileService.Verify(b => b.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName, Convert.ToBoolean(auditOptions), 0));
         }
 
@@ -67,13 +67,13 @@ namespace Blaise.Cli.Tests.Unit.Services
         [TestCase("20")]
         public void Given_We_Pass_DataDelivery_Arguments_With_Batch_Size_Options_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments(string batchSize)
         {
-            //Arrange
-            var args = new [] { "datadelivery", "-s", _serverParkName, "-q", _questionnaireName, "-f", _fileName, "-b", batchSize };
+            // Arrange
+            var args = new[] { "datadelivery", "-s", _serverParkName, "-q", _questionnaireName, "-f", _fileName, "-b", batchSize };
 
-            //Act
+            // Act
             _sut.ParseArguments(args);
 
-            //Assert
+            // Assert
             _blaiseFileService.Verify(b => b.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName, false, Convert.ToInt32(batchSize)));
         }
 
@@ -81,66 +81,66 @@ namespace Blaise.Cli.Tests.Unit.Services
         [TestCase("true", "10")]
         public void Given_We_Pass_DataDelivery_Arguments_With_FullNames_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments(string auditOptions, string batchSize)
         {
-            //Arrange
-            var args = new [] { "datadelivery", "--serverParkName", _serverParkName, "--questionnaireName", _questionnaireName, "--file", _fileName, "--audit", auditOptions, "--batchSize", batchSize };
-            //Act
+            // Arrange
+            var args = new[] { "datadelivery", "--serverParkName", _serverParkName, "--questionnaireName", _questionnaireName, "--file", _fileName, "--audit", auditOptions, "--batchSize", batchSize };
+
+            // Act
             _sut.ParseArguments(args);
 
-            //Assert
-            _blaiseFileService.Verify(b => b.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName, 
+            // Assert
+            _blaiseFileService.Verify(b => b.UpdateQuestionnairePackageWithData(_serverParkName, _questionnaireName, _fileName,
                 Convert.ToBoolean(auditOptions), Convert.ToInt32(batchSize)));
         }
-
 
         [Test]
         public void Given_We_Do_Not_Pass_A_ServerParkName_When_We_Call_ParseArguments_Then_Response_Of_1_is_returned()
         {
-            //Arrange
-            var args = new [] { "datadelivery", "--questionnaireName", _questionnaireName, "--file", _fileName };
+            // Arrange
+            var args = new[] { "datadelivery", "--questionnaireName", _questionnaireName, "--file", _fileName };
 
-            //Act
+            // Act
             var result = _sut.ParseArguments(args);
 
-            //Assert
+            // Assert
             Assert.AreEqual(1, result);
         }
 
         [Test]
         public void Given_We_Do_Not_Pass_An_QuestionnaireName_When_We_Call_ParseArguments_Then_Response_Of_1_is_returned()
         {
-            //Arrange
-            var args = new [] { "datadelivery", "--serverParkName", _serverParkName, "--file", _fileName };
+            // Arrange
+            var args = new[] { "datadelivery", "--serverParkName", _serverParkName, "--file", _fileName };
 
-            //Act
+            // Act
             var result = _sut.ParseArguments(args);
 
-            //Assert
+            // Assert
             Assert.AreEqual(1, result);
         }
 
         [Test]
         public void Given_We_Do_Not_Pass_A_File_When_We_Call_ParseArguments_Then_Response_Of_1_is_returned()
         {
-            //Arrange
-            var args = new [] { "datadelivery", "--serverParkName", _serverParkName, "--questionnaireName", _questionnaireName };
+            // Arrange
+            var args = new[] { "datadelivery", "--serverParkName", _serverParkName, "--questionnaireName", _questionnaireName };
 
-            //Act
+            // Act
             var result = _sut.ParseArguments(args);
 
-            //Assert
+            // Assert
             Assert.AreEqual(1, result);
         }
 
         [Test]
         public void Given_We_Do_Not_Pass_Audit_Or_Batch_Size_Options_When_We_Call_ParseArguments_Then_Response_Of_0_is_returned()
         {
-            //Arrange
-            var args = new [] { "datadelivery", "-s", _serverParkName, "-q", _questionnaireName, "-f", _fileName };
+            // Arrange
+            var args = new[] { "datadelivery", "-s", _serverParkName, "-q", _questionnaireName, "-f", _fileName };
 
-            //Act
+            // Act
             var result = _sut.ParseArguments(args);
 
-            //Assert
+            // Assert
             Assert.AreEqual(0, result);
         }
 
@@ -152,13 +152,13 @@ namespace Blaise.Cli.Tests.Unit.Services
         [TestCase(ApplicationType.Session)]
         public void Given_We_Pass_DataInterface_Arguments_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments(ApplicationType applicationType)
         {
-            //Arrange
-            var args = new [] { "datainterface", "-t", $"{applicationType}", "-f", "file.ext" };
+            // Arrange
+            var args = new[] { "datainterface", "-t", $"{applicationType}", "-f", "file.ext" };
 
-            //Act
+            // Act
             _sut.ParseArguments(args);
 
-            //Assert
+            // Assert
             _blaiseFileService.Verify(b => b.CreateDataInterfaceFile(applicationType, "file.ext"));
         }
 
@@ -170,55 +170,54 @@ namespace Blaise.Cli.Tests.Unit.Services
         [TestCase(ApplicationType.Session)]
         public void Given_We_Pass_DataInterface_Arguments_With_FullNames_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments(ApplicationType applicationType)
         {
-            //Arrange
-            var args = new [] { "datainterface", "--type", $"{applicationType}", "--file", "file.ext" };
+            // Arrange
+            var args = new[] { "datainterface", "--type", $"{applicationType}", "--file", "file.ext" };
 
-            //Act
+            // Act
             _sut.ParseArguments(args);
 
-            //Assert
+            // Assert
             _blaiseFileService.Verify(b => b.CreateDataInterfaceFile(applicationType, "file.ext"));
         }
 
         [Test]
         public void Given_We_Pass_An_Incorrect_ApplicationType_When_We_Call_ParseArguments_Then_Response_Of_1_is_returned()
         {
-            //Arrange
-            var args = new [] { "datainterface", "-t", "hello", "-f", "file.ext" };
+            // Arrange
+            var args = new[] { "datainterface", "-t", "hello", "-f", "file.ext" };
 
-            //Act
+            // Act
             var result = _sut.ParseArguments(args);
 
-            //Assert
+            // Assert
             Assert.AreEqual(1, result);
         }
 
         [Test]
         public void Given_We_Dont_Pass_In_TypeArgument_When_We_Call_ParseArguments_Then_Response_Of_1_is_returned()
         {
-            //Arrange
-            var args = new [] { "datainterface", "-f", "file.ext" };
+            // Arrange
+            var args = new[] { "datainterface", "-f", "file.ext" };
 
-            //Act
+            // Act
             var result = _sut.ParseArguments(args);
 
-            //Assert
+            // Assert
             Assert.AreEqual(1, result);
         }
 
         [Test]
         public void Given_We_Dont_Pass_In_FileArgument_When_We_Call_ParseArguments_Then_Response_Of_1_is_returned()
         {
-            //Arrange
-            var args = new [] { "datainterface", "-t", "hello" };
+            // Arrange
+            var args = new[] { "datainterface", "-t", "hello" };
 
-            //Act
+            // Act
             var result = _sut.ParseArguments(args);
 
-            //Assert
+            // Assert
             Assert.AreEqual(1, result);
         }
-
 
         [TestCase("true", true)]
         [TestCase("True", true)]
@@ -228,14 +227,13 @@ namespace Blaise.Cli.Tests.Unit.Services
         [TestCase("FALSE", false)]
         public void Given_We_Pass_QuestionnaireInstall_Arguments_When_We_Call_ParseArgument_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments(string arg, bool value)
         {
-
-            //Arrange
+            // Arrange
             var args = new[] { "questionnaireinstall", "-q", _questionnaireName, "-s", _serverParkName, "-f", _fileName, "-o", arg };
 
-            //Act
+            // Act
             var result = _sut.ParseArguments(args);
 
-            //Assert
+            // Assert
             _blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName, value));
         }
 
@@ -247,54 +245,53 @@ namespace Blaise.Cli.Tests.Unit.Services
         [TestCase("FALSE", false)]
         public void Given_We_Pass_QuestionnaireInstall_Arguments_With_FullNames_When_We_Call_ParseArguments_Then_The_Correct_Method_Is_Called_With_The_Correct_Arguments(string arg, bool value)
         {
-
-            //Arrange
+            // Arrange
             var args = new[] { "questionnaireinstall", "--serverParkName", _serverParkName, "--questionnaireName", _questionnaireName, "--questionnaireFile", _fileName, "--overwriteExistingData", arg };
-            //Act
+
+            // Act
             var result = _sut.ParseArguments(args);
 
-            //Assert
+            // Assert
             _blaiseQuestionnaireService.Verify(b => b.InstallQuestionnaire(_questionnaireName, _serverParkName, _fileName, value));
         }
 
         [Test]
         public void Given_We_Do_Not_Pass_A_ServerParkName_When_We_Call_ParseArguments_Then_Response_Of_1_is_returned_QuestionnaireInstall()
         {
-            //Arrange
+            // Arrange
             var args = new[] { "questionnaireinstall", "--questionnaireName", _questionnaireName, "--questionnaireFile", _fileName };
 
-            //Act
+            // Act
             var result = _sut.ParseArguments(args);
 
-            //Assert
+            // Assert
             Assert.AreEqual(1, result);
         }
 
         [Test]
         public void Given_We_Do_Not_Pass_An_QuestionnaireName_When_We_Call_ParseArguments_Then_Response_Of_1_is_returned_QuestionnaireInstall()
         {
-            //Arrange
-            var args = new [] { "questionnaireinstall", "--serverParkName", _serverParkName, "--questionnaireFile", _fileName};
+            // Arrange
+            var args = new[] { "questionnaireinstall", "--serverParkName", _serverParkName, "--questionnaireFile", _fileName };
 
-            //Act
+            // Act
             var result = _sut.ParseArguments(args);
 
-            //Assert
+            // Assert
             Assert.AreEqual(1, result);
         }
 
         [Test]
         public void Given_We_Do_Not_Pass_A_File_When_We_Call_ParseArguments_Then_Response_Of_1_is_returned_()
         {
-            //Arrange
-            var args = new [] { "questionnaireinstall", "--serverParkName", _serverParkName, "--questionnaireName", _questionnaireName };
+            // Arrange
+            var args = new[] { "questionnaireinstall", "--serverParkName", _serverParkName, "--questionnaireName", _questionnaireName };
 
-            //Act
+            // Act
             var result = _sut.ParseArguments(args);
 
-            //Assert
+            // Assert
             Assert.AreEqual(1, result);
         }
-
     }
 }

@@ -8,6 +8,7 @@ namespace Blaise.Cli.Core.Services
     public class BlaiseFileService : IBlaiseFileService
     {
         private readonly IBlaiseFileApi _blaiseFileApi;
+
         public BlaiseFileService(IBlaiseFileApi blaiseFileApi)
         {
             _blaiseFileApi = blaiseFileApi;

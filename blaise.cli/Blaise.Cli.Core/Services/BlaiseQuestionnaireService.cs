@@ -1,12 +1,10 @@
-﻿
+﻿using Blaise.Cli.Core.Extensions;
 using Blaise.Cli.Core.Interfaces;
-using Blaise.Cli.Core.Extensions;
-using Blaise.Nuget.Api.Contracts.Interfaces;
 using Blaise.Nuget.Api.Contracts.Enums;
 using Blaise.Nuget.Api.Contracts.Extensions;
+using Blaise.Nuget.Api.Contracts.Interfaces;
 using Blaise.Nuget.Api.Contracts.Models;
 using StatNeth.Blaise.API.ServerManager;
-
 
 namespace Blaise.Cli.Core.Services
 {
@@ -21,7 +19,7 @@ namespace Blaise.Cli.Core.Services
         {
             _blaiseQuestionnaireApi = blaiseQuestionnaireApi;
             _blaiseFileApi = blaiseFileApi;
-        } 
+        }
 
         public void InstallQuestionnaire(string questionnaireName, string serverParkName, string questionnaireFile, bool overwriteExistingData = true)
         {
@@ -41,6 +39,5 @@ namespace Blaise.Cli.Core.Services
 
             _blaiseQuestionnaireApi.InstallQuestionnaire(questionnaireName, serverParkName, questionnaireFile, installOptions);
         }
-        
     }
 }

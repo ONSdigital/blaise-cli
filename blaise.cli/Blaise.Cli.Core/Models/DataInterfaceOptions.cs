@@ -1,4 +1,4 @@
-﻿using CommandLine;
+using CommandLine;
 using StatNeth.Blaise.API.DataInterface;
 
 namespace Blaise.Cli.Core.Models

@@ -1,4 +1,4 @@
-﻿using StatNeth.Blaise.API.DataInterface;
+using StatNeth.Blaise.API.DataInterface;
 
 namespace Blaise.Cli.Core.Interfaces
 {
@@ -6,7 +6,7 @@ namespace Blaise.Cli.Core.Interfaces
     {
         void CreateDataInterfaceFile(ApplicationType applicationType, string fileName);
 
-        void UpdateQuestionnairePackageWithData(string serverParkName, string questionnaireName, 
+        void UpdateQuestionnairePackageWithData(string serverParkName, string questionnaireName,
             string questionnaireFile, bool auditOption = false, int batchSize = 0);
 
         void UpdateQuestionnaireFileWithSqlConnection(string questionnaireFile);

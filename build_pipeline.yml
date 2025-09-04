@@ -1,4 +1,4 @@
-﻿trigger: none
+trigger: none
 
 pool:
   vmImage: windows-latest
@@ -25,28 +25,20 @@ stages:
               feedsToUse: select
               vstsFeed: fbaf94f7-2d40-410a-8a27-de142d8d2313/2d8c792e-c1ad-4a66-924d-5bc4fec5fca0
 
-          - task: VSBuild@1
-            displayName: Build solution
-            inputs:
-              solution: $(solutionPath)
-              platform: $(buildPlatform)
-              configuration: $(buildConfiguration)
-
           - task: UseDotNet@2
             displayName: Install .NET SDK
             inputs:
               packageType: 'sdk'
               version: '8.0.408'  # Stable LTS
 
-          - task: PowerShell@2
-            displayName: List all files in working directory
-            inputs:
-              targetType: inline
-              script: |
-                Write-Host "Current directory: $(Build.SourcesDirectory)"
-                Get-ChildItem -Path "$(Build.SourcesDirectory)" -Recurse -Force | ForEach-Object {
-                  Write-Host $_.FullName
-                }
+          - script: dotnet --list-sdks
+            displayName: Check .NET SDK version
+
+          - script: dotnet --list-runtimes
+            displayName: Check .NET runtime versions
+
+          - script: dotnet format --version
+            displayName: Confirm dotnet-format version
 
           - task: PowerShell@2
             displayName: Check code formatting with dotnet-format
@@ -64,6 +56,13 @@ stages:
                   Write-Host "❌ Formatting check failed due to errors."
                   exit 1
                 }
+
+          - task: VSBuild@1
+            displayName: Build solution
+            inputs:
+              solution: $(solutionPath)
+              platform: $(buildPlatform)
+              configuration: $(buildConfiguration)
 
           - task: VSTest@2
             displayName: Run unit tests

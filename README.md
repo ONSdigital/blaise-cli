@@ -160,5 +160,3 @@ The editor config contains a mix of rules which only DotNet Format can understan
 ---
  
 This configuration promotes a consistent and readable codebase, aligned with modern C# conventions. All contributors should ensure their editors respect this `.editorconfig` file.
- 
----

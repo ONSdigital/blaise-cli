@@ -1,4 +1,3 @@
-﻿---
 trigger: none
 
 pool:
@@ -57,7 +56,6 @@ stages:
                   Write-Host "❌ Formatting check failed due to errors."
                   exit 1
                 }
-
           - task: VSBuild@1
             displayName: Build solution
             inputs:

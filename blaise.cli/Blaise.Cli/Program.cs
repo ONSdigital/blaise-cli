@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using Blaise.Cli.Core.Interfaces;
 using Blaise.Cli.Core.Services;

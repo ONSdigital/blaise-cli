@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using Blaise.Cli.Core.Interfaces;
 using Blaise.Cli.Core.Models;

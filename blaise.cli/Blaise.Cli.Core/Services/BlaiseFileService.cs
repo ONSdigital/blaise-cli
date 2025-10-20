@@ -1,4 +1,4 @@
-﻿using Blaise.Cli.Core.Extensions;
+using Blaise.Cli.Core.Extensions;
 using Blaise.Cli.Core.Interfaces;
 using Blaise.Nuget.Api.Contracts.Interfaces;
 using StatNeth.Blaise.API.DataInterface;

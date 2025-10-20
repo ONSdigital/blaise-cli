@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Blaise.Cli.Core.Interfaces;
 using Blaise.Cli.Core.Services;
 using Blaise.Nuget.Api.Contracts.Interfaces;

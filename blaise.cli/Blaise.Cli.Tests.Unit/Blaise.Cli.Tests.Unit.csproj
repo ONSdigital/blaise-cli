@@ -11,11 +11,14 @@
 	<ItemGroup>
 		<!-- Your project reference -->
 		<ProjectReference Include="..\Blaise.Cli.Core\Blaise.Cli.Core.csproj" />
+		<ProjectReference Include="..\blaise.Cli\Blaise.Cli.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<!-- Add all needed NuGet packages here -->
+		<PackageReference Include="Blaise.Nuget.Api" Version="2025.9.30.2-BLAIS5-logging" />
 		<PackageReference Include="EntityFramework" Version="6.4.4" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
 		<PackageReference Include="NUnit" Version="3.14.0" />
 		<PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
 		<PackageReference Include="Moq" Version="4.16.1" />
@@ -43,6 +46,10 @@
 		<PackageReference Include="System.Data.SQLite.EF6" Version="1.0.119.0" />
 		<PackageReference Include="System.Data.SQLite.Linq" Version="1.0.119.0" />
 		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="All" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Properties\" />
 	</ItemGroup>
 
 </Project>

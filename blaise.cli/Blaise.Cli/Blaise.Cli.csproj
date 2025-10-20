@@ -7,6 +7,7 @@
 		<AssemblyName>blaise.cli</AssemblyName>
 		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 		<Deterministic>true</Deterministic>
+		<RuntimeIdentifier>win7-x86</RuntimeIdentifier>
 	</PropertyGroup>
 
 	<ItemGroup>

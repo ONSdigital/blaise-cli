@@ -16,7 +16,7 @@
 
 	<ItemGroup>
 		<!-- Add all needed NuGet packages here -->
-		<PackageReference Include="Blaise.Nuget.Api" Version="2025.9.30.2-BLAIS5-logging" />
+		<PackageReference Include="Blaise.Nuget.Api" Version="2025.9.4.2" />
 		<PackageReference Include="EntityFramework" Version="6.4.4" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
 		<PackageReference Include="NUnit" Version="3.14.0" />

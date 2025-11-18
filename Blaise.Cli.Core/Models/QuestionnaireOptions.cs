@@ -1,7 +1,7 @@
-using CommandLine;
-
 namespace Blaise.Cli.Core.Models
 {
+    using CommandLine;
+
     [Verb("questionnaireinstall", HelpText = "Questionnaire install options")]
     public class QuestionnaireOptions
     {

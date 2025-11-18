@@ -1,10 +1,10 @@
-using System;
-using Blaise.Cli.Core.Interfaces;
-using Blaise.Cli.Core.Models;
-using CommandLine;
-
 namespace Blaise.Cli.Core.Services
 {
+    using System;
+    using Blaise.Cli.Core.Interfaces;
+    using Blaise.Cli.Core.Models;
+    using CommandLine;
+
     public class CommandService : ICommandService
     {
         private readonly IBlaiseFileService _blaiseFileService;
@@ -43,8 +43,12 @@ namespace Blaise.Cli.Core.Services
 
         private int UpdateQuestionnairePackageWithData(DataDeliveryOptions options)
         {
-            _blaiseFileService.UpdateQuestionnairePackageWithData(options.ServerParkName, options.QuestionnaireName,
-                options.File, Convert.ToBoolean(options.Audit), Convert.ToInt32(options.BatchSize));
+            _blaiseFileService.UpdateQuestionnairePackageWithData(
+                options.ServerParkName,
+                options.QuestionnaireName,
+                options.File,
+                Convert.ToBoolean(options.Audit),
+                Convert.ToInt32(options.BatchSize));
 
             return 0;
         }

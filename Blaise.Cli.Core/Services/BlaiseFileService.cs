@@ -1,10 +1,10 @@
-using Blaise.Cli.Core.Extensions;
-using Blaise.Cli.Core.Interfaces;
-using Blaise.Nuget.Api.Contracts.Interfaces;
-using StatNeth.Blaise.API.DataInterface;
-
 namespace Blaise.Cli.Core.Services
 {
+    using Blaise.Cli.Core.Extensions;
+    using Blaise.Cli.Core.Interfaces;
+    using Blaise.Nuget.Api.Contracts.Interfaces;
+    using StatNeth.Blaise.API.DataInterface;
+
     public class BlaiseFileService : IBlaiseFileService
     {
         private readonly IBlaiseFileApi _blaiseFileApi;

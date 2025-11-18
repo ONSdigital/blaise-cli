@@ -1,8 +1,8 @@
-using CommandLine;
-using StatNeth.Blaise.API.DataInterface;
-
 namespace Blaise.Cli.Core.Models
 {
+    using CommandLine;
+    using StatNeth.Blaise.API.DataInterface;
+
     [Verb("datainterface", HelpText = "Data interface options")]
     public class DataInterfaceOptions
     {

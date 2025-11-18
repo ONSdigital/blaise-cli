@@ -1,7 +1,7 @@
-using CommandLine;
-
 namespace Blaise.Cli.Core.Models
 {
+    using CommandLine;
+
     [Verb("datadelivery", HelpText = "Data delivery options")]
     public class DataDeliveryOptions
     {

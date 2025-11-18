@@ -1,13 +1,13 @@
-using Blaise.Cli.Core.Extensions;
-using Blaise.Cli.Core.Interfaces;
-using Blaise.Nuget.Api.Contracts.Enums;
-using Blaise.Nuget.Api.Contracts.Extensions;
-using Blaise.Nuget.Api.Contracts.Interfaces;
-using Blaise.Nuget.Api.Contracts.Models;
-using StatNeth.Blaise.API.ServerManager;
-
 namespace Blaise.Cli.Core.Services
 {
+    using Blaise.Cli.Core.Extensions;
+    using Blaise.Cli.Core.Interfaces;
+    using Blaise.Nuget.Api.Contracts.Enums;
+    using Blaise.Nuget.Api.Contracts.Extensions;
+    using Blaise.Nuget.Api.Contracts.Interfaces;
+    using Blaise.Nuget.Api.Contracts.Models;
+    using StatNeth.Blaise.API.ServerManager;
+
     public class BlaiseQuestionnaireService : IBlaiseQuestionnaireService
     {
         private readonly IBlaiseQuestionnaireApi _blaiseQuestionnaireApi;

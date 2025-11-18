@@ -14,7 +14,7 @@ namespace Blaise.Cli
         {
             try
             {
-                Console.WriteLine("Blaise ClI");
+                Console.WriteLine("Blaise CLI");
                 Console.WriteLine(string.Empty);
 
                 var serviceProvider = new ServiceCollection()

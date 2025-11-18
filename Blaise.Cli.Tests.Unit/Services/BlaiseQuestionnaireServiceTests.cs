@@ -46,61 +46,61 @@ namespace Blaise.Cli.Tests.Unit.Services
         [Test]
         public void Given_We_Have_Called_InstallQuestionnaire_When_We_have_supplied_An_Empty_QuestionnaireName_Then_An_Error_Is_Thrown()
         {
-            // act && assert
+            // act and assert
             var exception = Assert.Throws<ArgumentException>(() => _sut.InstallQuestionnaire(string.Empty, _serverParkName, _fileName));
 
-            Assert.IsNotNull(exception);
-            Assert.AreEqual("A value for the argument 'questionnaireName' must be supplied", exception.Message);
+            Assert.That(exception, Is.Not.Null);
+            Assert.That(exception.Message, Is.EqualTo("A value for the argument 'questionnaireName' must be supplied"));
         }
 
         [Test]
         public void Given_We_Have_Called_InstallQuestionnaire_When_We_have_supplied_A_Null_Value_For_QuestionnaireName_Then_An_Error_Is_Thrown()
         {
-            // act && assert
+            // act and assert
             var exception = Assert.Throws<ArgumentNullException>(() => _sut.InstallQuestionnaire(null, _serverParkName, _fileName));
 
-            Assert.IsNotNull(exception);
-            Assert.AreEqual("Value cannot be null.\r\nParameter name: questionnaireName", exception.Message);
+            Assert.That(exception, Is.Not.Null);
+            Assert.That(exception.Message, Is.EqualTo("Value cannot be null.\r\nParameter name: questionnaireName"));
         }
 
         [Test]
         public void Given_We_Have_Called_InstallQuestionnaire_When_We_have_supplied_An_Empty_ServerParkName_Then_An_Error_Is_Thrown()
         {
-            // act && assert
+            // act and assert
             var exception = Assert.Throws<ArgumentException>(() => _sut.InstallQuestionnaire(_questionnaireName, string.Empty, _fileName));
 
-            Assert.IsNotNull(exception);
-            Assert.AreEqual("A value for the argument 'serverParkName' must be supplied", exception.Message);
+            Assert.That(exception, Is.Not.Null);
+            Assert.That(exception.Message, Is.EqualTo("A value for the argument 'serverParkName' must be supplied"));
         }
 
         [Test]
         public void Given_We_Have_Called_InstallQuestionnaire_When_We_have_supplied_A_Null_Value_For_ServerParkName_Then_An_Error_Is_Thrown()
         {
-            // act && assert
+            // act and assert
             var exception = Assert.Throws<ArgumentNullException>(() => _sut.InstallQuestionnaire(_questionnaireName, null, _fileName));
 
-            Assert.IsNotNull(exception);
-            Assert.AreEqual("Value cannot be null.\r\nParameter name: serverParkName", exception.Message);
+            Assert.That(exception, Is.Not.Null);
+            Assert.That(exception.Message, Is.EqualTo("Value cannot be null.\r\nParameter name: serverParkName"));
         }
 
         [Test]
         public void Given_We_Have_Called_InstallQuestionnaire_When_We_have_supplied_An_Empty_FileName_Then_An_Error_Is_Thrown()
         {
-            // act && assert
+            // act and assert
             var exception = Assert.Throws<ArgumentException>(() => _sut.InstallQuestionnaire(_questionnaireName, _serverParkName, string.Empty));
 
-            Assert.IsNotNull(exception);
-            Assert.AreEqual("A value for the argument 'questionnaireFile' must be supplied", exception.Message);
+            Assert.That(exception, Is.Not.Null);
+            Assert.That(exception.Message, Is.EqualTo("A value for the argument 'questionnaireFile' must be supplied"));
         }
 
         [Test]
         public void Given_We_Have_Called_InstallQuestionnaire_When_We_have_supplied_A_Null_Value_For_FileName_Then_An_Error_Is_Thrown()
         {
-            // act && assert
+            // act and assert
             var exception = Assert.Throws<ArgumentNullException>(() => _sut.InstallQuestionnaire(_questionnaireName, _serverParkName, null));
 
-            Assert.IsNotNull(exception);
-            Assert.AreEqual("Value cannot be null.\r\nParameter name: questionnaireFile", exception.Message);
+            Assert.That(exception, Is.Not.Null);
+            Assert.That(exception.Message, Is.EqualTo("Value cannot be null.\r\nParameter name: questionnaireFile"));
         }
     }
 }

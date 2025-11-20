@@ -58,7 +58,7 @@ stages:
             inputs:
               testSelector: testAssemblies
               testAssemblyVer2: |
-                **\*test*.dll
+                **\bin\$(BuildConfiguration)\**\*test*.dll
                 !**\*Behaviour.dll
                 !**\*TestAdapter.dll
                 !**\obj\**

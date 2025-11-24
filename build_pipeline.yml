@@ -15,7 +15,9 @@ stages:
     jobs:
       - job: build
         steps:
+
           - task: UseDotNet@2
+            displayName: Install .NET
             inputs:
               packageType: sdk
               version: 8.x
@@ -46,12 +48,12 @@ stages:
                   exit 1
                 }
 
-          - task: DotNetCoreCLI@2
+          - task: VSBuild@1
             displayName: Build solution
             inputs:
-              command: build
-              projects: $(solutionPath)
-              arguments: --configuration $(buildConfiguration) --no-restore
+              solution: $(solutionPath)
+              platform: $(buildPlatform)
+              configuration: $(buildConfiguration)
 
           - task: DotNetCoreCLI@2
             displayName: Run unit tests
@@ -60,15 +62,14 @@ stages:
               projects: '**/*[Tt]est*.csproj'
               arguments: --configuration $(buildConfiguration) --no-build
 
-          - task: DotNetCoreCLI@2
-            displayName: Run dotnet publish
+          - task: CopyFiles@2
+            displayName: Copy artifact
             inputs:
-              command: publish
-              publishWebProjects: false
-              projects: '**/Blaise.Cli.csproj'
-              arguments: --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) --no-restore
-              zipAfterPublish: false
-              modifyOutputPath: false
+              SourceFolder: $(System.DefaultWorkingDirectory)
+              Contents: '**\bin\$(BuildConfiguration)\**'
+              TargetFolder: $(build.ArtifactStagingDirectory)
+              CleanTargetFolder: true
+              OverWrite: true
 
           - task: PublishBuildArtifacts@1
             displayName: Publish artifact

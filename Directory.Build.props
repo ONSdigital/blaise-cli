@@ -16,7 +16,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Blaise.Nuget.Api" Version="2025.9.4.2" />
+		<PackageReference Include="Blaise.Nuget.Api" Version="2025.11.24.5-BLAIS5-4988" />
 		<PackageReference Include="System.Memory" Version="4.6.3" />
 		<PackageReference Include="System.Collections.Immutable" Version="10.0.0" />
 		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="All" />

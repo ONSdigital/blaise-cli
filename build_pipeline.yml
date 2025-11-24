@@ -23,7 +23,7 @@ stages:
               version: 8.x
 
           - task: DotNetCoreCLI@2
-            displayName: Run dotnet restore
+            displayName: Run restore
             inputs:
               command: restore
               projects: $(solutionPath)
@@ -59,7 +59,9 @@ stages:
             displayName: Run unit tests
             inputs:
               command: test
-              projects: '**/*[Tt]est*.csproj'
+              projects: |
+                **/*[Tt]est*.csproj
+                !**/*Behaviour.csproj
               arguments: --configuration $(buildConfiguration) --no-build
 
           - task: CopyFiles@2

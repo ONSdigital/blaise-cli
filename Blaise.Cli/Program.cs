@@ -1,4 +1,4 @@
-﻿namespace Blaise.Cli
+namespace Blaise.Cli
 {
     using System;
     using System.IO;

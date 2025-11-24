@@ -65,7 +65,7 @@ stages:
             inputs:
               command: publish
               publishWebProjects: false
-              projects: $(solutionPath)
+              projects: '**/Blaise.Cli.csproj'
               arguments: --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) --no-restore
               zipAfterPublish: false
               modifyOutputPath: false

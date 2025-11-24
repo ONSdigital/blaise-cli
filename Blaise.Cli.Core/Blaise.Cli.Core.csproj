@@ -2,7 +2,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommandLineParser" Version="2.9.1" />
-		<PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
+		<PackageReference Include="System.Data.SQLite" Version="2.0.2" />
 	</ItemGroup>
 
 </Project>
+ 

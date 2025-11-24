@@ -71,4 +71,7 @@ dotnet_naming_symbols.private_instance_fields.applicable_accessibilities = priva
 dotnet_diagnostic.SA0001.severity = none   # suppress disabled XML analysis warning
 dotnet_diagnostic.SA1101.severity = none   # don't force 'this.' prefix on local calls
 dotnet_diagnostic.SA1309.severity = none   # allow field names starting with underscore
+dotnet_diagnostic.SA1600.severity = none   # don't force documentation
+dotnet_diagnostic.SA1601.severity = none   # don't force documentation
+dotnet_diagnostic.SA1602.severity = none   # don't force documentation
 dotnet_diagnostic.SA1633.severity = none   # don't force file headers

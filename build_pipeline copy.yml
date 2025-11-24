@@ -15,18 +15,18 @@ stages:
     jobs:
       - job: build
         steps:
+          - task: NuGetCommand@2
+            displayName: Run NuGet restore
+            inputs:
+              command: restore
+              restoreSolution: $(solutionPath)
+              feedsToUse: select
+              vstsFeed: fbaf94f7-2d40-410a-8a27-de142d8d2313/2d8c792e-c1ad-4a66-924d-5bc4fec5fca0
+
           - task: UseDotNet@2
             inputs:
               packageType: sdk
               version: 8.x
-
-          - task: DotNetCoreCLI@2
-            displayName: Run dotnet restore
-            inputs:
-              command: restore
-              projects: $(solutionPath)
-              feedsToUse: select
-              vstsFeed: fbaf94f7-2d40-410a-8a27-de142d8d2313/2d8c792e-c1ad-4a66-924d-5bc4fec5fca0
 
           - task: PowerShell@2
             displayName: Check code formatting
@@ -34,7 +34,7 @@ stages:
               targetType: inline
               errorActionPreference: continue
               script: |
-                cd $(Build.SourcesDirectory)
+                cd "$(Build.SourcesDirectory)"
                 dotnet format Blaise.Cli.sln --verify-no-changes --no-restore --verbosity diagnostic
                 if ($LASTEXITCODE -eq 0) {
                   Write-Host '✅ Check code formatting found no issues.'
@@ -46,29 +46,32 @@ stages:
                   exit 1
                 }
 
-          - task: DotNetCoreCLI@2
+          - task: VSBuild@1
             displayName: Build solution
             inputs:
-              command: build
-              projects: $(solutionPath)
-              arguments: --configuration $(buildConfiguration) --no-restore
+              solution: $(solutionPath)
+              platform: $(buildPlatform)
+              configuration: $(buildConfiguration)
 
-          - task: DotNetCoreCLI@2
+          - task: VSTest@2
             displayName: Run unit tests
             inputs:
-              command: test
-              projects: '**/*[Tt]est*.csproj'
-              arguments: --configuration $(buildConfiguration) --no-build
+              testSelector: testAssemblies
+              testAssemblyVer2: |
+                **\bin\$(BuildConfiguration)\**\*test*.dll
+                !**\*Behaviour.dll
+                !**\*TestAdapter.dll
+                !**\obj\**
+              searchFolder: $(System.DefaultWorkingDirectory)
 
-          - task: DotNetCoreCLI@2
-            displayName: Run dotnet publish
+          - task: CopyFiles@2
+            displayName: Copy artifact
             inputs:
-              command: publish
-              publishWebProjects: false
-              projects: $(solutionPath)
-              arguments: --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) --no-restore
-              zipAfterPublish: false
-              modifyOutputPath: false
+              SourceFolder: $(System.DefaultWorkingDirectory)
+              Contents: '**\bin\$(BuildConfiguration)\**'
+              TargetFolder: $(build.ArtifactStagingDirectory)
+              CleanTargetFolder: true
+              OverWrite: true
 
           - task: PublishBuildArtifacts@1
             displayName: Publish artifact

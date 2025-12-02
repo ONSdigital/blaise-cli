@@ -1,3 +1,4 @@
+---
 trigger: none
 
 pool:
@@ -5,7 +6,7 @@ pool:
 
 variables:
   solutionPath: '**/*.sln'
-  buildPlatform: Any CPU
+  buildPlatform: AnyCPU
   buildConfiguration: Release
 
 stages:
@@ -14,46 +15,36 @@ stages:
     jobs:
       - job: build
         steps:
-          - task: NuGetToolInstaller@1
-            displayName: Install NuGet
 
-          - task: NuGetCommand@2
-            displayName: Run NuGet restore
+          - task: UseDotNet@2
+            displayName: Install .NET
+            inputs:
+              packageType: sdk
+              version: 8.x
+
+          - task: DotNetCoreCLI@2
+            displayName: Run restore
             inputs:
               command: restore
-              restoreSolution: $(solutionPath)
+              projects: $(solutionPath)
               feedsToUse: select
               vstsFeed: fbaf94f7-2d40-410a-8a27-de142d8d2313/2d8c792e-c1ad-4a66-924d-5bc4fec5fca0
 
-          - task: UseDotNet@2
-            displayName: Install .NET SDK
-            inputs:
-              packageType: 'sdk'
-              version: '8.0.408'  # Stable LTS
-
-          - script: dotnet --list-sdks
-            displayName: Check .NET SDK version
-
-          - script: dotnet --list-runtimes
-            displayName: Check .NET runtime versions
-
-          - script: dotnet format --version
-            displayName: Confirm dotnet-format version
-
           - task: PowerShell@2
-            displayName: Check code formatting with dotnet-format
+            displayName: Check code formatting
             inputs:
               targetType: inline
+              errorActionPreference: continue
               script: |
-                cd "$(Build.SourcesDirectory)"
-                dotnet format blaise.cli/blaise.cli.sln --verify-no-changes --no-restore --verbosity diagnostic
+                cd $(Build.SourcesDirectory)
+                dotnet format Blaise.Cli.sln --verify-no-changes --no-restore --verbosity diagnostic
                 if ($LASTEXITCODE -eq 0) {
-                  Write-Host "✅ Code formatting is clean."
+                  Write-Host '✅ Check code formatting found no issues.'
                 } elseif ($LASTEXITCODE -eq 2) {
-                  Write-Host "⚠️ Formatting or naming violations detected (warnings)."
-                  exit 0  # Optional: don't fail build for warnings
+                  Write-Host '⚠️ Check code formatting found warnings.'
+                  exit 0
                 } else {
-                  Write-Host "❌ Formatting check failed due to errors."
+                  Write-Host '❌ Check code formatting failed.'
                   exit 1
                 }
 
@@ -64,23 +55,21 @@ stages:
               platform: $(buildPlatform)
               configuration: $(buildConfiguration)
 
-          - task: VSTest@2
+          - task: DotNetCoreCLI@2
             displayName: Run unit tests
             inputs:
-              testSelector: testAssemblies
-              testAssemblyVer2: |
-                **\*test*.dll
-                !**\*Behaviour.dll
-                !**\*TestAdapter.dll
-                !**\obj\**
-              searchFolder: $(System.DefaultWorkingDirectory)
+              command: test
+              projects: |
+                **/*[Tt]est*.csproj
+                !**/*Behaviour.csproj
+              arguments: --configuration $(buildConfiguration) --no-build
 
           - task: CopyFiles@2
             displayName: Copy artifact
             inputs:
               SourceFolder: $(System.DefaultWorkingDirectory)
               Contents: '**\bin\$(BuildConfiguration)\**'
-              TargetFolder: $(build.artifactstagingdirectory)
+              TargetFolder: $(build.ArtifactStagingDirectory)
               CleanTargetFolder: true
               OverWrite: true
 
